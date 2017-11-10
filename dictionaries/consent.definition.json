@@ -1,0 +1,9 @@
+{
+  "mandatory_field_error": {
+    "en": "Mandatory field!"
+  },
+  "mail_field_error": {
+    "en": "Error in email"
+  }
+
+}

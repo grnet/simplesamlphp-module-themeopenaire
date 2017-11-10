@@ -106,6 +106,14 @@ function present_attributes($t, $attributes, $nameParent)
         $str = '<div class="ssp-attrs--container js-spread"><table id="table_with_attributes"  class="table" '. $summary .'>';
     }
 
+    $mandatoryAttributeNames = array("sn", "mail", "givenName", "eduPersonScopedAffiliation");
+    $mandatoryAttributes = array();
+    foreach($mandatoryAttributeNames as $el) {
+        $mandatoryAttributes[$el] = array("");
+    }
+
+    $attributes = array_merge($mandatoryAttributes, $attributes);
+
     foreach ($attributes as $name => $value) {
         $nameraw = $name;
         $name = $t->getAttributeTranslation($parentStr . $nameraw);
@@ -151,6 +159,17 @@ function present_attributes($t, $attributes, $nameParent)
                     $str .= '<img src="data:image/jpeg;base64,' .
                         htmlspecialchars($value[0]) .
                         '" alt="User photo" />';
+                } elseif($value[0] === '' && in_array($nameraw, $mandatoryAttributeNames)) {
+                    $str .='<div><input name="'.$nameraw.'" class="form-control">';
+                    $str .='<span class="mandatory">'.
+                        $t->t('{themeopenminted:consent:mandatory_field_error}').
+                        '</span>';
+                    if ($nameraw === 'mail') {
+                        $str .= '<span class="mail">'.
+                        $t->t('{themeopenminted:consent:mail_field_error}').
+                        '</span>';
+                    }
+                    $str .='</div>';
                 } else {
                     $str .= htmlspecialchars($value[0]);
                 }

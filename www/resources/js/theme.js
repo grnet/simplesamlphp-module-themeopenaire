@@ -29,6 +29,28 @@ function resizeAll() {
   }
 };
 
+// Toggle error class to input parent div if empty
+function handleMandatory(el) {
+  if (el.val().trim().length === 0) {
+    el.parent('div').addClass('error-mandatory');
+  } else {
+    el.parent('div').removeClass('error-mandatory');
+  }
+}
+
+// Toggle error class to input parent div if mail invalid
+function handleMail(el) {
+  var regex = new RegExp(/\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b/i);
+  var res = regex.test(el.val().trim());
+  if (!res) {
+    el.parent('div').addClass('error-mail');
+  } else {
+    el.parent('div').removeClass('error-mail');
+  }
+}
+
+
+
 $(document).ready(function() {
   resizeAll();
   // loader for discopower view
@@ -47,4 +69,29 @@ $(document).ready(function() {
   $(window).resize(function() {
     resizeAll();
   });
+
+  // Do not submit form if any mandatory input field is empty 
+  $('button[name="yes"]').click(function(e){
+    var inputs = $('input.form-control');
+    inputs.each(function(key, input) {
+      handleMandatory($(input));
+    });
+    var mailInputs = $('input[name="mail"]');
+    mailInputs.each(function(key, input) {
+      handleMail($(input));
+    });
+
+    var errors = parseInt($('.error-mandatory').length);
+    if (parseInt($('.error-mandatory').length) + parseInt($('.error-mail').length)>0) { return false;}
+  })
+
+  $('input.form-control').bind("keyup change", function(e) {
+      handleMandatory($(this));
+  })
+
+  $('input[name="mail"]').bind("keyup change", function(e) {
+      handleMail($(this));
+  })
+
+
 });

@@ -338,3 +338,22 @@ body .ssp-modal-body {
     padding: 18px;
     white-space: pre-line;
 }
+
+.form-control ~span {
+    color: $state-danger-text;
+    font-size: 13px;
+    display: none;
+}
+
+.error-mandatory input, 
+.error-mail input {
+    border-color: $alert-danger-text;
+}
+
+.error-mandatory span.mandatory {
+    display: block;
+}
+
+.error-mail span.mail {
+    display: block;
+}
