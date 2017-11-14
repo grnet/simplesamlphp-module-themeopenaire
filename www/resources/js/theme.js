@@ -73,21 +73,24 @@ $(document).ready(function() {
     resizeAll();
   });
 
-  // Do not submit form if any mandatory input field is empty
   $('button[name="yes"]').click(function(e){
     var inputs = $('input.form-control');
+    // Check if mandatory input field is empty 
     inputs.each(function(key, input) {
       handleMandatory($(input));
     });
+    // Check if mail field is properly formatted
     var mailInputs = $('input[name="mail"]');
     mailInputs.each(function(key, input) {
       handleMail($(input));
     });
 
-    var errors = parseInt($('.error-mandatory').length);
+    // Do not submit form if there are any errors
     if (parseInt($('.error-mandatory').length) + parseInt($('.error-mail').length)>0) { 
       return false;
     }
+
+    // If the user has filled in inputs, show loader and call php script
     if (inputs.length > 0) {
       var data = {};
       var url = '../themeopenminted/dummy.php';
