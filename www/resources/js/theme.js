@@ -82,7 +82,30 @@ $(document).ready(function() {
     });
 
     var errors = parseInt($('.error-mandatory').length);
-    if (parseInt($('.error-mandatory').length) + parseInt($('.error-mail').length)>0) { return false;}
+    if (parseInt($('.error-mandatory').length) + parseInt($('.error-mail').length)>0) { 
+      return false;
+    }
+    if (inputs.length > 0) {
+      var data = {};
+      var url = '../themeopenminted/dummy.php';
+      inputs.each(function(key, input) {
+        var name = $(input).attr('name');
+        var value = $(input).val().trim();
+        if (name === 'eduPersonScopedAffiliation') {
+          value = 'member@'+value;
+        }
+        data[name] = value;
+      });
+      $.ajax({
+        type: "POST",
+        url: url,
+        data: data,
+        success: function(data){
+          console.log(data);
+        },
+        dataType: 'json'
+      });
+    }
   })
 
   $('input.form-control').bind("keyup change", function(e) {
