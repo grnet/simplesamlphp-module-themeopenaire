@@ -262,6 +262,13 @@ $btn-distance: 12px;
     }
 }
 
+.ssp-btn__show-more {
+    color: $text-color;
+    &:hover {
+        color: $jacksons-purple;
+    }
+
+}
 
 // Content
 
@@ -345,7 +352,7 @@ body .ssp-modal-body {
     display: none;
 }
 
-.error-mandatory input, 
+.error-mandatory input,
 .error-mail input {
     border-color: $alert-danger-text;
 }

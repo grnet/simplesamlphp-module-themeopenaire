@@ -52,6 +52,9 @@ function handleMail(el) {
 
 
 $(document).ready(function() {
+
+  $('[data-toggle="tooltip"]').tooltip();
+
   resizeAll();
   // loader for discopower view
   $('#loader').delay(300).fadeOut('slow', function() {
@@ -70,7 +73,7 @@ $(document).ready(function() {
     resizeAll();
   });
 
-  // Do not submit form if any mandatory input field is empty 
+  // Do not submit form if any mandatory input field is empty
   $('button[name="yes"]').click(function(e){
     var inputs = $('input.form-control');
     inputs.each(function(key, input) {
