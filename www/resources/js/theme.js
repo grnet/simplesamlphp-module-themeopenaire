@@ -99,6 +99,7 @@ $(document).ready(function() {
         }
         data[name] = value;
       });
+      $('#loader').show();
       $.ajax({
         type: "POST",
         url: url,
