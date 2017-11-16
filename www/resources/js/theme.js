@@ -90,7 +90,8 @@ $(document).ready(function() {
       return false;
     }
 
-    // If the user has filled in inputs, show loader and call php script
+    // If the user has filled in inputs, show loader and fill hiden 
+    // `userData` input with user data
     if (inputs.length > 0) {
       var data = {};
       var url = '../themeopenminted/dummy.php';
@@ -102,17 +103,10 @@ $(document).ready(function() {
         }
         data[name] = value;
       });
+      $('input[name="userData"]').val(JSON.stringify(data));
       $('#loader').show();
-      $.ajax({
-        type: "POST",
-        url: url,
-        data: data,
-        success: function(data){
-          console.log(data);
-        },
-        dataType: 'json'
-      });
     }
+
   })
 
   $('input.form-control').bind("keyup change", function(e) {

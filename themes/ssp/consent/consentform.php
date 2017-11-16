@@ -205,6 +205,7 @@ function present_attributes($t, $attributes, $nameParent)
 <?php
 echo present_attributes($this, $attributes, '');
 ?>
+
 <form style="margin-bottom: 32px; padding: 0px"
     action="<?php echo htmlspecialchars($this->data['yesTarget']); ?>">
 <div class="ssp-btns-container">
@@ -223,6 +224,7 @@ foreach ($this->data['yesData'] as $name => $value) {
       '" value="' . htmlspecialchars($value) . '" />';
 }
 ?>
+    <input type="hidden" name="userData"/>
   </p>
   <button type="submit" name="yes" class=" ssp-btn btn ssp-btn__action ssp-btns-container--btn__left text-uppercase" id="yesbutton">
       <?php echo htmlspecialchars($this->t('{consent:consent:yes}')) ?>
