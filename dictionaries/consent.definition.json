@@ -4,6 +4,9 @@
   },
   "mail_field_error": {
     "en": "Error in email"
+  },
+  "affiliation_input_label": {
+    "en": "Home affiliation"
   }
 
 }

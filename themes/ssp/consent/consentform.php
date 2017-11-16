@@ -116,6 +116,7 @@ function present_attributes($t, $attributes, $nameParent)
 
     foreach ($attributes as $name => $value) {
         $nameraw = $name;
+        $affliation = $name === 'eduPersonScopedAffiliation'; 
         $name = $t->getAttributeTranslation($parentStr . $nameraw);
 
         if (preg_match('/^child_/', $nameraw)) {
@@ -127,9 +128,14 @@ function present_attributes($t, $attributes, $nameParent)
             }
         } else {
             // insert values directly
-
-            $str .= "\n" . '<tr class="' . $alternate[($i++ % 2)] .
-                '"><td><div class="attrname ssp-table--attrname">' . htmlspecialchars($name) . '</div>';
+            
+            if ($affliation) {
+                $str .= "\n" . '<tr class="' . $alternate[($i++ % 2)] .
+                    '"><td><div class="attrname ssp-table--attrname">' . $t->t('{themeopenminted:consent:affiliation_input_label}') . '</div>';
+            } else {
+                $str .= "\n" . '<tr class="' . $alternate[($i++ % 2)] .
+                    '"><td><div class="attrname ssp-table--attrname">' . htmlspecialchars($name) . '</div>';
+            }
 
             $isHidden = in_array($nameraw, $t->data['hiddenAttributes'], true);
             if ($isHidden) {
