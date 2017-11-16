@@ -94,7 +94,6 @@ function showEntry($t, $metadata, $favourite = FALSE) {
 
 ?>
 
-<h2 class="text-center">Choose your academic/social account</h2>
 
 
 <?php

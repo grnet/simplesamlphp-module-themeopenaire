@@ -131,10 +131,6 @@ if($onLoad !== '') {
       <img class="ssp-logo-openminted" src="<?php echo SimpleSAML_Module::getModuleURL('themeopenminted/resources/images/logo_openminted.svg'); ?>" alt="OpenMinTeD" />
     </a>
   </div>
-  <h1 class="text-center subtle">
-    We will be using the information below
-    <small>Please fill all missing information</small>
-  </h1>
 </div> <!-- /header -->
 <div class="ssp-container" id="content">
 <div class="container js-spread">
