@@ -92,7 +92,7 @@ $(document).ready(function() {
 
   $('button[name="yes"]').click(function(e){
     var inputs = $('input.form-control');
-    // Check if mandatory input field is empty 
+    // Check if mandatory input field is empty
     inputs.each(function(key, input) {
       handleMandatory($(input));
     });
@@ -108,11 +108,11 @@ $(document).ready(function() {
     }
 
     // Do not submit form if there are any errors
-    if (parseInt($('.error-mandatory').length) + parseInt($('.error-mail').length)>0) { 
+    if (parseInt($('.error-mandatory').length) + parseInt($('.error-mail').length)>0) {
       return false;
     }
 
-    // If the user has filled in inputs, show loader and fill hiden 
+    // If the user has filled in inputs, show loader and fill hiden
     // `userData` input with user data
     if (inputs.length > 0) {
       var data = {};
@@ -142,5 +142,8 @@ $(document).ready(function() {
       handleTerms($(this));
   })
 
+  $('#edugain-modal').on('shown.bs.modal', function(e) {
+    $('#query_edugain').liveUpdate('#list_edugain');
+  });
 
 });

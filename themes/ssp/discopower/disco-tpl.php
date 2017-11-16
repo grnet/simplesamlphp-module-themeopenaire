@@ -33,28 +33,6 @@ $this->data['jquery'] = array('core' => TRUE, 'ui' => TRUE, 'css' => TRUE);
 $this->data['head'] .= '<script type="text/javascript" src="' . SimpleSAML_Module::getModuleUrl('discopower/js/jquery.livesearch.js')  . '"></script>';
 $this->data['head'] .= '<script type="text/javascript" src="' . SimpleSAML_Module::getModuleUrl('discopower/js/' . $this->data['score'] . '.js')  . '"></script>';
 
-$this->data['head'] .= '<script type="text/javascript">
-
-  $(document).ready(function() {';
-    $i = 0;
-    foreach ($this->data['idplist'] AS $tab => $slist) {
-  if ($tab !== 'all') {
-      $this->data['head'] .= "\n" . '$("#query_' . $tab . '").liveUpdate("#list_' . $tab . '")' .
-        (($i++ == 0) && (empty($faventry)) ? '.focus()' : '') . ';';
-  }
-
-
-    }
-
-    $this->data['head'] .= '
-});
-
-</script>';
-
-
-
-
-
 if (!empty($faventry)) $this->data['autofocus'] = 'favouritesubmit';
 
 $this->includeAtTemplateBase('includes/header.php');
@@ -118,6 +96,7 @@ function getTranslatedName($t, $metadata) {
 }
 
 
+  echo('<div class="ssp-container-small">');
 
 
 if (!empty($faventry)) {
@@ -153,7 +132,7 @@ $top = '<div class="row ssp-content-group">
       <div class="col-sm-12">';
 $title = '';
 $title_html = '';
-$list_open = '<div class="metalist ssp-content-group__provider-list ssp-content-group__provider-list--other" id="list_other">';
+$list_open = '<div class="metalist ssp-content-group__provider-list ssp-content-group__provider-list--other text-center" id="list_other">';
 $providers = '';
 $close = '</div></div></div>'; // /metalist /ssp-content-group /row
 
@@ -161,28 +140,44 @@ foreach( $this->data['idplist'] AS $tab => $slist) {
   if ($tab !== 'all') {
     if (!empty($slist)) {
       if($tab == 'edugain') {
-        echo '<div class="row ssp-content-group js-spread">
-                <div class="col-sm-12 js-spread">
-                  <h3>' . $this->t('{discopower:tabs:' . $tab . '}') . '</h3>
-                <div class="input-group">
-                <span class="input-group-addon"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></span>
-                <form id="idpselectform" action="?" method="get"><input class="form-control" aria-describedby="search institutions" placeholder="Search..." type="text" value="" name="query_'
-                . $tab
-                . '" id="query_' . $tab . '" /></form>'
-                . '</div> <!-- /input-group -->
-                <div class="metalist ssp-content-group__provider-list ssp-content-group__provider-list--edugain js-spread" id="list_'
-                . $tab  . '">';
-        if (!empty($this->data['preferredidp']) && array_key_exists($this->data['preferredidp'], $slist)) {
-          $idpentry = $slist[$this->data['preferredidp']];
-          echo (showEntry($this, $idpentry, TRUE));
-        }
+  $edugainList = '<div class="metalist ssp-content-group__provider-list ssp-content-group__provider-list--edugain js-spread" id="list_' .$tab . '">';
+  if (!empty($this->data['preferredidp']) && array_key_exists($this->data['preferredidp'], $slist)) {
+    $idpentry = $slist[$this->data['preferredidp']];
+    $edugainList .= (showEntry($this, $idpentry, TRUE));
+  }
 
-        foreach ($slist AS $idpentry) {
-          if ($idpentry['entityid'] != $this->data['preferredidp']) {
-            echo (showEntry($this, $idpentry));
-          }
-        }
-        echo($close);
+  foreach ($slist AS $idpentry) {
+    if ($idpentry['entityid'] != $this->data['preferredidp']) {
+      $edugainList .= (showEntry($this, $idpentry));
+    }
+  }
+  $edugainList .= '</div>'; // /metalist
+  $buttonOpenEdugain = '<div class="row ssp-content-group"><div class="col-sm-12 text-center"><button type="button" class="ssp-btn btn ssp-btn__open-edugain ssp-btn__lg text-uppercase" data-toggle="modal" data-target="#edugain-modal"><img src="'
+    . SimpleSAML_Module::getModuleURL('themeopenminted/resources/images/edugain.png') . '">Login with edugain</button></div></div>';
+  echo('
+    <div class="modal fade" id="edugain-modal" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="js-close-custom close"><span aria-hidden="true">&times;</span></button>
+            <h2 class="modal-title">' . $this->t('{discopower:tabs:' . $tab . '}') . '</h2>
+          </div>
+          <div class="modal-body ssp-modal-body">
+            <div class="row">
+                <div class="input-group">
+                  <span class="input-group-addon"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></span>
+                  <form id="idpselectform" action="?" method="get"><input class="form-control" aria-describedby="search institutions" placeholder="Search..." type="text" value="" name="query_'
+                  . $tab
+                  . '" id="query_' . $tab . '" /></form>'
+                  . '</div> <!-- /input-group -->'
+                  . $edugainList
+                . '</div> <!-- /row -->
+          </div> <!-- /modal-body -->
+        </div> <!-- /modal-content -->
+      </div> <!-- /modal-dialog -->
+    </div> <!-- /modal -->
+    ');
+  echo($buttonOpenEdugain);
       }
       else {
         if($tab == "social") {
@@ -210,19 +205,42 @@ foreach( $this->data['idplist'] AS $tab => $slist) {
               $providers .= (showEntry($this, $idpentry));
             }
           }
-          $title_html = '<h3>' . $title . '</h3>';
-          echo $top . $title_html . $top_close . $list_open . $providers . $close;
+          echo $top . $top_close . $list_open . $providers . $close;
         }
       }
     }
   }
-
 }
-
 ?>
 
 
-
-
+<div class="row ssp-content-group">
+  <div class="col-sm-12 text-center ssp-or">or</div>
+</div>
+<div class="row ssp-content-group">
+  <div class="col-sm-12">
+    <form>
+      <div class="form-group">
+        <input type="email" class="form-control" placeholder="Username / E-mail">
+      </div>
+      <div class="form-group">
+        <input type="password" class="form-control" placeholder="Password">
+      </div>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox"> Remember me
+        </label>
+      </div>
+      <button type="submit" class="ssp-btn btn  ssp-btn__action text-uppercase ssp-btn__lg ssp-btn__login">Login</button>
+    </form>
+  </div>
+</div>
+<div class="row ssp-content-group">
+  <div class="col-sm-12">
+    <a href="#" class="pull-left ssp-link-forgot">Forgot your password?</a>
+    <a href="#" class="pull-right ssp-link-forgot">Forgot your username?</a>
+  </div>
+</div>
+</div> <!-- /ssp-container-small -->
 
 <?php $this->includeAtTemplateBase('includes/footer.php');
