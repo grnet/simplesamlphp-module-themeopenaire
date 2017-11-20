@@ -53,6 +53,13 @@ function handleMail(el) {
 
 $(document).ready(function() {
 
+  var has_form = $('input.form-control').length > 0;
+  if (!has_form) {
+    $('h1 small').hide();
+  }
+
+
+
   $('[data-toggle="tooltip"]').tooltip();
 
   resizeAll();
