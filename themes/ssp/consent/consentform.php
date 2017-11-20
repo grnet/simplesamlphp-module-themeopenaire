@@ -118,6 +118,7 @@ function present_attributes($t, $attributes, $nameParent)
         $nameraw = $name;
         $affliation = $name === 'eduPersonScopedAffiliation'; 
         $name = $t->getAttributeTranslation($parentStr . $nameraw);
+        $missing = $value[0] === '' && in_array($nameraw, $mandatoryAttributeNames);
 
         if (preg_match('/^child_/', $nameraw)) {
             // insert child table
@@ -131,11 +132,15 @@ function present_attributes($t, $attributes, $nameParent)
             
             if ($affliation) {
                 $str .= "\n" . '<tr class="' . $alternate[($i++ % 2)] .
-                    '"><td><div class="attrname ssp-table--attrname">' . $t->t('{themeopenminted:consent:affiliation_input_label}') . '</div>';
+                    '"><td><div class="attrname ssp-table--attrname">' . $t->t('{themeopenminted:consent:affiliation_input_label}');
             } else {
                 $str .= "\n" . '<tr class="' . $alternate[($i++ % 2)] .
-                    '"><td><div class="attrname ssp-table--attrname">' . htmlspecialchars($name) . '</div>';
+                    '"><td><div class="attrname ssp-table--attrname">' . htmlspecialchars($name);
             }
+            if ($missing) {
+                $str .= ' (*)';
+            }
+            $str.= '</div>';
 
             $isHidden = in_array($nameraw, $t->data['hiddenAttributes'], true);
             if ($isHidden) {
@@ -165,7 +170,7 @@ function present_attributes($t, $attributes, $nameParent)
                     $str .= '<img src="data:image/jpeg;base64,' .
                         htmlspecialchars($value[0]) .
                         '" alt="User photo" />';
-                } elseif($value[0] === '' && in_array($nameraw, $mandatoryAttributeNames)) {
+                } elseif ($missing) {
                     $str .='<div><input name="'.$nameraw.'" class="form-control">';
                     $str .='<span class="mandatory">'.
                         $t->t('{themeopenminted:consent:mandatory_field_error}').
