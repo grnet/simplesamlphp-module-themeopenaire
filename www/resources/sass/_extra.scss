@@ -173,48 +173,48 @@ $btn-distance: 12px;
         margin-left: 12px;
     }
     @at-root &__action {
-        background-color: $btn-action;
-        color: $white;
-        border-color: transparent;
+        background-color: $white;
+        color: darken($btn-action, 10%);
+        border-color: $btn-action;
         &:focus, &:active {
             background-color: $btn-action;
             color: $white;
             border-color: transparent;
         }
         &:hover {
-            background-color: $white;
-            color: darken($btn-action, 10%);
-            border-color: $btn-action;
+            background-color: $btn-action;
+            color: $white;
+            border-color: transparent;
         }
     }
     @at-root &__secondary {
-        background-color: $mouse;
-        color: $white;
-        border-color: transparent;
+        background-color: $white;
+        color: $gray;
+        border-color: $mouse;
         &:focus, &:active {
             background-color: $mouse;
             color: $white;
             border-color: transparent;
         }
         &:hover {
-            background-color: $white;
-            color: $gray;
-            border-color: $mouse;
+            background-color: $mouse;
+            color: $white;
+            border-color: transparent;
         }
     }
     @at-root &__warning {
-        background-color: $btn-warning;
-        color: $white;
-        border-color: transparent;
+        background-color: $white;
+        color: $btn-warning;
+        border-color: $btn-warning;
         &:focus, &:active {
             background-color: $btn-warning;
             color: $white;
             border-color: transparent;
         }
         &:hover {
-            background-color: $white;
-            color: $btn-warning;
-            border-color: $btn-warning;
+            background-color: $btn-warning;
+            color: $white;
+            border-color: transparent;
         }
     }
     @at-root &__footer {
