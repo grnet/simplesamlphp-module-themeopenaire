@@ -204,10 +204,16 @@ function present_attributes($t, $attributes, $nameParent)
     return $str;
 }
 
- echo '<h2 class="text-center">' .
+ echo '<h2 class="subtle text-center">' .
       $this->t(
-        '{consent:consent:consent_accept}',
+        '{themeopenminted:consent:header}',
           array( 'SPNAME' => $dstName, 'IDPNAME' => $srcName)).
+      '<small>' .
+      $this->t(
+        '{themeopenminted:consent:subheader}',
+          array( 'SPNAME' => $dstName, 'IDPNAME' => $srcName)).
+
+      '</small>' .
       '</h2>
       <div class="row js-spread">
           <div class="col-sm-12 ssp-content-group js-spread">';

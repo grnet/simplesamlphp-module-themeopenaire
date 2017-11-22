@@ -7,6 +7,12 @@
   },
   "affiliation_input_label": {
     "en": "Home organization"
+  },
+  "header": {
+    "en": "We will be using the information below"
+  },
+  "subheader": {
+    "en": "Please fill all missing information"
   }
 
 }

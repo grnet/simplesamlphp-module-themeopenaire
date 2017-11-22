@@ -55,7 +55,7 @@ $(document).ready(function() {
 
   var has_form = $('input.form-control').length > 0;
   if (!has_form) {
-    $('h1 small').hide();
+    $('h2 small').hide();
   }
 
 
