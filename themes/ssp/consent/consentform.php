@@ -119,6 +119,12 @@ function present_attributes($t, $attributes, $nameParent)
         $affliation = $name === 'eduPersonScopedAffiliation'; 
         $name = $t->getAttributeTranslation($parentStr . $nameraw);
         $missing = $value[0] === '' && in_array($nameraw, $mandatoryAttributeNames);
+        $isHidden = in_array($nameraw, $t->data['hiddenAttributes'], true);
+
+
+        if ($isHidden) {
+            continue;
+        }
 
         if (preg_match('/^child_/', $nameraw)) {
             // insert child table
@@ -142,14 +148,7 @@ function present_attributes($t, $attributes, $nameParent)
             }
             $str.= '</div>';
 
-            $isHidden = in_array($nameraw, $t->data['hiddenAttributes'], true);
-            if ($isHidden) {
-                $hiddenId = SimpleSAML\Utils\Random::generateID();
-
-                $str .= '<div class="attrvalue ssp-table--attrvalue" style="display: none;" id="hidden_' . $hiddenId . '">';
-            } else {
-                $str .= '<div class="attrvalue ssp-table--attrvalue">';
-            }
+            $str .= '<div class="attrvalue ssp-table--attrvalue">';
 
             if (sizeof($value) > 1) {
                 // we hawe several values
@@ -186,17 +185,6 @@ function present_attributes($t, $attributes, $nameParent)
                 }
             } // end of if multivalue
             $str .= '</div>';
-
-            if ($isHidden) {
-                $str .= '<div class="attrvalue consent_showattribute" id="visible_' . $hiddenId . '">';
-                $str .= '<a class="consent_showattributelink ssp-btn__show-more" href="javascript:SimpleSAML_show(\'hidden_' . $hiddenId;
-                $str .= '\'); SimpleSAML_hide(\'visible_' . $hiddenId . '\');"'
-                  .' data-toggle="tooltip" data-placement="right" title="'. $t->t('{consent:consent:show_attribute}') .'">';
-                $str .= '<span class="glyphicon glyphicon-eye-open ssp-show-more" aria-hidden="true"></span>';
-                $str .= '</a>';
-                $str .= '</div>';
-            }
-
             $str .= '</td></tr>';
         }	// end else: not child table
     }	// end foreach
