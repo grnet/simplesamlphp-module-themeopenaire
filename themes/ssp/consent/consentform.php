@@ -114,6 +114,27 @@ function present_attributes($t, $attributes, $nameParent)
 
     $attributes = array_merge($mandatoryAttributes, $attributes);
 
+    $attributeOrder = array(
+        'sn',
+        'givenName',
+        'displayName',
+        'mail',
+        'eduPersonScopedAffiliation',
+        'eduPersonEntitlement',
+        'eduPersonAssurance',
+        'eduPersonUniqueId',
+    );
+    $newAttributes = array();
+    foreach ($attributeOrder as $attrKey) {
+        if (!empty($attributes[$attrKey])) {
+            $newAttributes[$attrKey] = $attributes[$attrKey];
+            unset($attributes[$attrKey]);
+        }
+    }
+    $attributes = array_merge($newAttributes, $attributes);
+
+
+
     foreach ($attributes as $name => $value) {
         $nameraw = $name;
         $affliation = $name === 'eduPersonScopedAffiliation'; 
