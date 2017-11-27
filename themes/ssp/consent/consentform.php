@@ -103,7 +103,7 @@ function present_attributes($t, $attributes, $nameParent)
         $str = '<div class="ssp-attrs--container"><table class="table" ' . $summary . '>';
     } else {
         $parentStr = '';
-        $str = '<div class="ssp-attrs--container js-spread"><table id="table_with_attributes"  class="table ssp-table" '. $summary .'>';
+        $str = '<div class="ssp-attrs--container"><table id="table_with_attributes"  class="table ssp-table" '. $summary .'>';
     }
 
     $mandatoryAttributeNames = array("sn", "mail", "givenName", "eduPersonScopedAffiliation");
