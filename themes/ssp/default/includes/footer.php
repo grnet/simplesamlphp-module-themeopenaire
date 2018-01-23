@@ -87,7 +87,7 @@ if ($includeLanguageBar) {
 }
 
 ?>
-        <div class="copy">Copyright &copy; 2016-2017 <a href="https://openminted.eu/">OpenMinTeD</a></div>
+        <div class="copy">Copyright &copy; 2016-2018 <a href="https://openaire.eu/">OpenAIRE</a></div>
         <div class="powered">Powered by <a href="https://github.com/rciam">RCIAM</a></div>
       </div> <!-- /container-fluid -->
   </footer>

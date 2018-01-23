@@ -45,7 +45,7 @@ header('X-Frame-Options: SAMEORIGIN');
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0" />
 <script type="text/javascript" src="/<?php echo $this->data['baseurlpath']; ?>resources/script.js"></script>
-<title>OpenMinTeD SSO | <?php
+<title>OpenAIRE Single Sign-On Service | <?php
 if(array_key_exists('header', $this->data)) {
   echo $this->data['header'];
 } else {
@@ -126,9 +126,6 @@ if($onLoad !== '') {
   <div class="text-center ssp-logo">
     <a href="https://www.openaire.eu/">
       <img src="<?php echo SimpleSAML_Module::getModuleURL('themeopenaire/resources/images/logo_horizontal.png'); ?>" alt="OpenAIRE" />
-    </a>
-    <a class="ssp-logo__link--right" href="http://openminted.eu/">
-      <img class="ssp-logo-openminted" src="<?php echo SimpleSAML_Module::getModuleURL('themeopenaire/resources/images/logo_openminted.svg'); ?>" alt="OpenMinTeD" />
     </a>
   </div>
 </div> <!-- /header -->
