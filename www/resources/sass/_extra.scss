@@ -37,7 +37,7 @@ body {
 a {
     border: 1px solid transparent;
     @extend .font-smooth;
-    &:hover {
+    &:hover, &:active, &:focus {
         color: $link-color-hover;
         text-decoration: none;
     }
@@ -225,10 +225,7 @@ $btn-distance: 12px;
         background-color: transparent;
         color: $btn-footer;
         border-color: transparent;
-        &:focus, &:active {
-            color: $btn-footer;
-        }
-        &:hover {
+        &:focus, &:active, &:hover {
             color: $link-color-hover;
             border-color: $silver;
         }
