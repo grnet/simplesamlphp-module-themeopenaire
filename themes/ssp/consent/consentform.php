@@ -159,7 +159,7 @@ function present_attributes($t, $attributes, $nameParent)
             
             if ($affliation) {
                 $str .= "\n" . '<tr class="' . $alternate[($i++ % 2)] .
-                    '"><td><div class="attrname ssp-table--attrname">' . $t->t('{themeopenminted:consent:affiliation_input_label}');
+                    '"><td><div class="attrname ssp-table--attrname">' . $t->t('{themeopenaire:consent:affiliation_input_label}');
             } else {
                 $str .= "\n" . '<tr class="' . $alternate[($i++ % 2)] .
                     '"><td><div class="attrname ssp-table--attrname">' . htmlspecialchars($name);
@@ -193,11 +193,11 @@ function present_attributes($t, $attributes, $nameParent)
                 } elseif ($missing) {
                     $str .='<div><input name="'.$nameraw.'" class="form-control">';
                     $str .='<span class="mandatory">'.
-                        $t->t('{themeopenminted:consent:mandatory_field_error}').
+                        $t->t('{themeopenaire:consent:mandatory_field_error}').
                         '</span>';
                     if ($nameraw === 'mail') {
                         $str .= '<span class="mail">'.
-                        $t->t('{themeopenminted:consent:mail_field_error}').
+                        $t->t('{themeopenaire:consent:mail_field_error}').
                         '</span>';
                     }
                     $str .='</div>';
@@ -215,11 +215,11 @@ function present_attributes($t, $attributes, $nameParent)
 
  echo '<h2 class="subtle text-center">' .
       $this->t(
-        '{themeopenminted:consent:header}',
+        '{themeopenaire:consent:header}',
           array( 'SPNAME' => $dstName, 'IDPNAME' => $srcName)).
       '<small>' .
       $this->t(
-        '{themeopenminted:consent:subheader}',
+        '{themeopenaire:consent:subheader}',
           array( 'SPNAME' => $dstName, 'IDPNAME' => $srcName)).
 
       '</small>' .

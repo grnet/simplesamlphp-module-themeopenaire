@@ -72,7 +72,7 @@ function showEntry($t, $metadata, $favourite = FALSE) {
 
   if(in_array($namelower, $providersOnlyIcon)) {
     $html = '<a class="metaentry ssp-btn--round-icon" href="' . $basequerystring . urlencode($metadata['entityid']) . '">';
-    $html .= '<img alt="Identity Provider" class="entryicon" src="' . SimpleSAML_Module::getModuleURL('themeopenminted/resources/images/' . $namelower . '.jpg') . '" />';
+    $html .= '<img alt="Identity Provider" class="entryicon" src="' . SimpleSAML_Module::getModuleURL('themeopenaire/resources/images/' . $namelower . '.jpg') . '" />';
     $html .= '</a>';
   }
   else {
