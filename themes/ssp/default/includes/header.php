@@ -54,7 +54,7 @@ if(array_key_exists('header', $this->data)) {
 ?></title>
 
   <link rel="stylesheet" type="text/css" href="<?php echo htmlspecialchars(SimpleSAML_Module::getModuleURL('themeopenaire/resources/css/app.css')); ?>" />
-  <link rel="shortcut icon" href="<?php echo htmlspecialchars(SimpleSAML_Module::getModuleURL('themeopenaire/resources/images/favicon-16x16.png')); ?>"  />
+  <link rel="shortcut icon" href="<?php echo htmlspecialchars(SimpleSAML_Module::getModuleURL('themeopenaire/resources/images/favicon.png')); ?>"  />
 
 <?php
 
@@ -125,7 +125,7 @@ if($onLoad !== '') {
 <div class="header">
   <div class="text-center ssp-logo">
     <a href="https://www.openaire.eu/">
-      <img src="<?php echo SimpleSAML_Module::getModuleURL('themeopenaire/resources/images/logo_horizontal.png'); ?>" alt="OpenAIRE" />
+      <img src="<?php echo SimpleSAML_Module::getModuleURL('themeopenaire/resources/images/logo.png'); ?>" alt="OpenAIRE" />
     </a>
   </div>
 </div> <!-- /header -->
