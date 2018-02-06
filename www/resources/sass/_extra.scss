@@ -52,6 +52,10 @@ form {
     margin: 0;
 }
 
+.ssp-text-left {
+    text-align: left!important;
+}
+
 
 // Headings
 // No use of bem, when we want to override every instance of them
@@ -140,14 +144,10 @@ h2.subtle {
 }
 
 .ssp-lang-container {
-    position: absolute;
-    left: 30px;
-}
-
-@media screen and (max-width: 600px) {
-    .ssp-lang-container {
-        position: static;
-    }
+    display: inline-block;
+    // position: absolute;
+    // bottom: -10px;
+    // right: 24px;
 }
 
 
@@ -219,7 +219,7 @@ $btn-img-copy-height: 20px;
             border-color: transparent;
         }
     }
-    @at-root &__open-edugain {
+    @at-root &__lg {
         background-color: $white;
         color: $black;
         border-color: $silver;
@@ -236,8 +236,10 @@ $btn-img-copy-height: 20px;
         }
         img {
             height: $btn-img-height;
-            border-radius: $btn-img-height/2;
             margin-right: $btn-distance;
+            &.round {
+                border-radius: $btn-img-height/2;
+            }
         }
     }
     @at-root &__footer {
@@ -261,6 +263,12 @@ $btn-img-copy-height: 20px;
         img {
             height: $btn-img-height;
             border-radius: $btn-img-height/2;
+        }
+    }
+    &--horizontal-icon {
+        padding: 6px 34px;
+        img {
+            height: $btn-img-height;
         }
     }
     &--copy {
@@ -324,6 +332,13 @@ $btn-img-copy-height: 20px;
                 display: inline-block;
                 position: relative;
                 padding: 0;
+            }
+        }
+        &--local {
+            padding: 2px 6px 2px 54px;
+            a {
+                display: inline-block;
+                position: relative;
             }
         }
     }

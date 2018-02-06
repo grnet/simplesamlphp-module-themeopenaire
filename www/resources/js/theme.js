@@ -146,4 +146,8 @@ $(document).ready(function() {
     $('#query_edugain').liveUpdate('#list_edugain');
   });
 
+  $('.js-pick-language').click(function() {
+
+  });
+
 });
