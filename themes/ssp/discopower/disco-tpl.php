@@ -99,7 +99,7 @@ if ($includeLanguageBar) {
       if ($current) {
         $lang_current = $langnames[$lang];
       } else {
-        $textarray[] = '<li class="ssp-dropdown__two_cols--item"><a class="js-pick-language" data-language="' . htmlspecialchars(\SimpleSAML\Utils\HTTP::addURLParameters(\SimpleSAML\Utils\HTTP::getSelfURL(), array($this->languageParameterName => $lang))) . '">' .
+        $textarray[] = '<li class="ssp-dropdown__two_cols--item"><a class="js-pick-language" href="' . htmlspecialchars(\SimpleSAML\Utils\HTTP::addURLParameters(\SimpleSAML\Utils\HTTP::getSelfURL(), array($this->languageParameterName => $lang))) . '">' .
           $langnames[$lang] . '</a></li>';
       }
     }
