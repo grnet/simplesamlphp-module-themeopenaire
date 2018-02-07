@@ -37,6 +37,8 @@ if (!empty($faventry)) $this->data['autofocus'] = 'favouritesubmit';
 
 $this->includeAtTemplateBase('includes/header.php');
 
+echo '<h1 class="text-center disco">' . $this->t('{themeopenaire:discopower:header}') . '</h1>';
+
 $languages_html = '';
 $includeLanguageBar = TRUE;
 if (!empty($_POST))
@@ -133,7 +135,7 @@ function showEntry($t, $metadata, $favourite = FALSE) {
   else if($namelower_dasherize == $providerLocal) {
     $html = '<a class="ssp-btn btn ssp-btn__open-edugain ssp-btn__lg text-uppercase" title="OpenAIRE log in" href="' . $basequerystring . urlencode($metadata['entityid']) . '">';
     $html .= '<img alt="Identity Provider" class="entryicon" src="' . SimpleSAML_Module::getModuleURL('themeopenaire/resources/images/' . $namelower_dasherize . '.png') . '" />';
-    $html .= 'log in with your OpenAIRE account';
+    $html .= 'OpenAIRE account';
     $html .= '</a>';
   }
   else {
@@ -235,8 +237,8 @@ foreach( $this->data['idplist'] AS $tab => $slist) {
     }
   }
   $edugainList .= '</div>'; // /metalist
-  $buttonOpenEdugain = '<div class="row ssp-content-group"><div class="col-sm-12 text-center"><button type="button" class="ssp-btn btn ssp-btn__btn-lg ssp-btn__lg text-uppercase" data-toggle="modal" data-target="#edugain-modal"><img class="round" src="'
-    . SimpleSAML_Module::getModuleURL('themeopenaire/resources/images/edugain.png') . '">log in with edugain</button></div></div>';
+  $buttonOpenEdugain = '<div class="row ssp-content-group"><div class="col-sm-12 text-center"><h3 class="disco">Log in with</h3><button type="button" class="ssp-btn btn ssp-btn__btn-lg ssp-btn__lg text-uppercase" data-toggle="modal" data-target="#edugain-modal"><img class="round" src="'
+    . SimpleSAML_Module::getModuleURL('themeopenaire/resources/images/edugain.png') . '">edugain</button></div></div>';
   $edugain_html .= '
     <div class="modal fade" id="edugain-modal" tabindex="-1" role="dialog">
       <div class="modal-dialog modal-lg">
@@ -297,6 +299,7 @@ foreach( $this->data['idplist'] AS $tab => $slist) {
 ?>
 
 
+  <p class="ssp-signup text-center">Need an account? <a href="http://beta.services.openaire.eu:8380/uoa-user-management/register.jsp">Sign up</a></p>
 </div> <!-- /ssp-container-small -->
 
 <?php $this->includeAtTemplateBase('includes/footer.php');

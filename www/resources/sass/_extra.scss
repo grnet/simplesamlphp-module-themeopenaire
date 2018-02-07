@@ -7,8 +7,12 @@
 
  */
 @import url('https://fonts.googleapis.com/css?family=Lato:400,300,300i');
+@import url('https://fonts.googleapis.com/css?family=Raleway|Raleway+Dots');
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400|Roboto+Condensed:300,400,700|Open+Sans:300, 600');
 $lato : 'Lato', serif;
-
+$openSans: 'Open Sans', sans-serif;
+$raleway: 'Raleway', sans-serif;
+$roboto: 'Roboto', sans-serif;
 
 // Overall
 
@@ -23,11 +27,11 @@ body {
     display: flex;
     min-height: 100vh;
     flex-direction: column;
+
 }
 
 .ssp-container {
     flex: 1;
-    margin-top: 24px;
 }
 
 .header, .ssp-footer {
@@ -61,7 +65,7 @@ form {
 // No use of bem, when we want to override every instance of them
 
 $header-font-weight: 300;
-$headers_margin_top: 30px;
+$headers_margin_top: 50px;
 .ssp-logo {
     margin-top: $headers_margin_top;
     a {
@@ -72,22 +76,25 @@ $headers_margin_top: 30px;
         }
     }
     img {
-       height: $logo-height;
+       width: $logo-width;
     }
 }
 
 .headers-text {
     font-weight: $header-font-weight;
     font-family: $lato;
-    letter-spacing: 2px;
     margin-top: $headers_margin_top;
 }
 
 h1 {
     @extend .headers-text;
-    font-size: 30px;
+    font-size: 36px;
     text-transform: none!important;
-    margin-bottom: 0;
+    margin: 0;
+    &.disco {
+        color: $alt-text;
+        font-family: $openSans;
+    }
 }
 
 
@@ -111,6 +118,12 @@ h2 {
 h3 {
     @extend .headers-text;
     font-size: 16px;
+    &.disco {
+        @extend .font-smooth;
+        font-family: $raleway;
+        color: $light-gray;
+        margin-top: 20px;
+    }
 }
 
 h4 {
@@ -153,87 +166,48 @@ h2.subtle {
 
 // Buttons
 
-$margin-btn: 2px;
-$btn-distance: 12px;
+$margin-btn: 20px;
+$btn-distance: 10px;
 $btn-img-height: 36px;
 $btn-img-copy-height: 20px;
 .ssp-btn {
     @extend .font-smooth;
+    border-radius: 2px;
     letter-spacing: 1px;
-    font-size: 11px;
-    padding: 12px 18px;
-    line-height: 1.4;
-    border-radius: 0;
-    border: 1px solid;
-    margin: $margin-btn;
+    font-size: 13px;
+    padding: 15px;
+    line-height: 40px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.07);
+    border: 0 none;
+    margin-bottom: $margin-btn;
     white-space: normal;
+    color: $scorpion;
+    font-family: $roboto;
+    &:hover, &:focus, &:active {
+        color: $btn-action;
+        box-shadow: 0 6px 50px rgba(0,0,0,0.05);
+    }
     .caret {
         margin-left: 12px;
     }
     @at-root &__lg {
         width: 100%;
-        margin: 2px 0;
+        margin: 0;
     }
     @at-root &__action {
-        background-color: $white;
-        color: darken($btn-action, 10%);
-        border-color: $btn-action;
-        &:focus, &:active {
-            background-color: $btn-action;
-            color: $white;
-            border-color: transparent;
-        }
-        &:hover {
-            background-color: $btn-action;
-            color: $white;
-            border-color: transparent;
+        &:focus, &:active, &:hover {
+            color: $btn-action;
         }
     }
     @at-root &__secondary {
-        background-color: $white;
-        color: $gray;
-        border-color: $mouse;
-        &:focus, &:active {
-            background-color: $mouse;
-            color: $white;
-            border-color: transparent;
-        }
-        &:hover {
-            background-color: $mouse;
-            color: $white;
-            border-color: transparent;
+        &:focus, &:active, &:hover {
+            color: $mouse;
         }
     }
     @at-root &__warning {
-        background-color: $white;
         color: $btn-warning;
-        border-color: $btn-warning;
-        &:focus, &:active {
-            background-color: $btn-warning;
-            color: $white;
-            border-color: transparent;
-        }
-        &:hover {
-            background-color: $btn-warning;
-            color: $white;
-            border-color: transparent;
-        }
     }
     @at-root &__lg {
-        background-color: $white;
-        color: $black;
-        border-color: $silver;
-        padding: 8px;
-        &:focus, &:active {
-            background-color: $white;
-            color: $black;
-            border-color: $gray;
-        }
-        &:hover {
-            background-color: $white;
-            color: darken($btn-action, 10%);
-            border-color: $btn-action;
-        }
         img {
             height: $btn-img-height;
             margin-right: $btn-distance;
@@ -376,10 +350,11 @@ $btn-img-copy-height: 20px;
 
 .ssp-or {
     @extend .font-smooth;
-    font-size: 22px;
+    font-family: $raleway;
+    font-size: 16px;
     color: $manatee;
-    margin-top: 18px;
-    margin-bottom: 12px;
+    margin-top: 40px;
+    margin-bottom: 40px;
 }
 
 body .ssp-modal-body {
@@ -484,6 +459,21 @@ input.form-control[type="radio"], input.form-control[type="checkbox"] {
  }
 
  .ssp-container-small {
-    max-width: 375px;
+    max-width: 280px;
     margin: 0 auto;
+ }
+
+ .ssp-signup {
+    @extend .font-smooth;
+    padding-top: 2px;
+    font-style: italic;
+    color: #90929D;
+    a {
+        color: #cbcbcb;
+        &:hover {
+            color: #767779;
+        }
+    }
+
+
  }
