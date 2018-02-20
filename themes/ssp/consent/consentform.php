@@ -106,8 +106,9 @@ function present_attributes($t, $attributes, $nameParent)
         $str = '<div class="ssp-attrs--container"><table id="table_with_attributes"  class="table ssp-table" '. $summary .'>';
     }
 
-    $mandatoryAttributeNames = array("sn", "mail", "givenName", "eduPersonScopedAffiliation");
+    $mandatoryAttributeNames = array("sn", "mail", "givenName");
     $mandatoryAttributes = array();
+    $editableAttributes = array("consentO");
     foreach($mandatoryAttributeNames as $el) {
         $mandatoryAttributes[$el] = array("");
     }
@@ -140,6 +141,7 @@ function present_attributes($t, $attributes, $nameParent)
         $affliation = $name === 'eduPersonScopedAffiliation'; 
         $name = $t->getAttributeTranslation($parentStr . $nameraw);
         $missing = $value[0] === '' && in_array($nameraw, $mandatoryAttributeNames);
+        $editable = in_array($nameraw, $editableAttributes);
         $isHidden = in_array($nameraw, $t->data['hiddenAttributes'], true);
 
 
@@ -190,6 +192,8 @@ function present_attributes($t, $attributes, $nameParent)
                     $str .= '<img src="data:image/jpeg;base64,' .
                         htmlspecialchars($value[0]) .
                         '" alt="User photo" />';
+                } elseif ($editable) {
+                    $str .='<div><input name="'.$nameraw.'" class="form-control" value="'.$value[0].'"></div>';
                 } elseif ($missing) {
                     $str .='<div><input name="'.$nameraw.'" class="form-control">';
                     $str .='<span class="mandatory">'.

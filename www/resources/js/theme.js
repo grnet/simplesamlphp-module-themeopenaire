@@ -31,10 +31,12 @@ function resizeAll() {
 
 // Toggle error class to input parent div if empty
 function handleMandatory(el) {
-  if (el.val().trim().length === 0) {
-    el.parent('div').addClass('error-mandatory');
-  } else {
-    el.parent('div').removeClass('error-mandatory');
+  if ($(el).siblings('span.mandatory').length >0) {
+    if (el.val().trim().length === 0) {
+      el.parent('div').addClass('error-mandatory');
+    } else {
+      el.parent('div').removeClass('error-mandatory');
+    }
   }
 }
 
@@ -101,13 +103,9 @@ $(document).ready(function() {
     // `userData` input with user data
     if (inputs.length > 0) {
       var data = {};
-      var url = '../themeopenminted/dummy.php';
       inputs.each(function(key, input) {
         var name = $(input).attr('name');
         var value = $(input).val().trim();
-        if (name === 'eduPersonScopedAffiliation') {
-          value = 'member@'+value;
-        }
         data[name] = value;
       });
       $('input[name="userData"]').val(JSON.stringify(data));
