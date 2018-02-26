@@ -366,3 +366,11 @@ body .ssp-modal-body {
 .error-mail span.mail {
     display: block;
 }
+
+input[type="radio"] {
+    margin: 4px 8px;
+    width: auto;
+    display: inline-block;
+    height: auto;
+    border: 0 none;
+}

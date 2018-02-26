@@ -176,11 +176,23 @@ function present_attributes($t, $attributes, $nameParent)
             if (sizeof($value) > 1) {
                 // we hawe several values
                 $str .= '<ul class="list-unstyled ssp-table--attrvalue--list">';
+                $index = 0;
                 foreach ($value as $listitem) {
+                    $index++;
                     if ($nameraw === 'jpegPhoto') {
                         $str .= '<li class="ssp-table--attrvalue--list--item"><img src="data:image/jpeg;base64,' .
                             htmlspecialchars($listitem) .
                             '" alt="User photo" /></li>';
+                    } elseif ($nameraw === 'mail') { 
+                        $str .= '<li class="ssp-table--attrvalue--list--item">';
+                        $str .= '<label for="mail'.$index.'">';
+                        $str .= '<input type="radio" class="form-control" name="mail" value="'.$listitem.'" id="mail'.$index.'" ';
+                        if ($index === 1) {
+                            $str .= 'checked';
+                        }
+                        $str .= ' >';
+                        $str .= $listitem;
+                        $str .= '</label>';
                     } else {
                         $str .= '<li class="ssp-table--attrvalue--list--item">' . htmlspecialchars($listitem) . '</li>';
                     }
