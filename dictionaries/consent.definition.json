@@ -13,6 +13,9 @@
   },
   "subheader": {
     "en": "Please fill all missing information"
+  },
+  "multiple_mails_tip": {
+    "en": "Choose your primary mail address"
   }
 
 }

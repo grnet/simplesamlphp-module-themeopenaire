@@ -198,6 +198,11 @@ function present_attributes($t, $attributes, $nameParent)
                     }
                 }
                 $str .= '</ul>';
+                if ($nameraw === 'mail') {
+                    $str .='<i>';
+                    $str .= $t->t('{themeopenminted:consent:multiple_mails_tip}');
+                    $str .='</i>';
+                }
             } elseif (isset($value[0])) {
                 // we hawe only one value
                 if ($nameraw === 'jpegPhoto') {
