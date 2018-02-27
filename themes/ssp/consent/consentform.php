@@ -199,7 +199,7 @@ function present_attributes($t, $attributes, $nameParent)
                 }
                 $str .= '</ul>';
                 if ($nameraw === 'mail') {
-                    $str .='<i>';
+                    $str .='<i class="ssp-form--hint">';
                     $str .= $t->t('{themeopenminted:consent:multiple_mails_tip}');
                     $str .='</i>';
                 }
