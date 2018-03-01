@@ -143,6 +143,7 @@ function present_attributes($t, $attributes, $nameParent)
         $missing = $value[0] === '' && in_array($nameraw, $mandatoryAttributeNames);
         $editable = in_array($nameraw, $editableAttributes);
         $isHidden = in_array($nameraw, $t->data['hiddenAttributes'], true);
+        
 
 
         if ($isHidden) {
@@ -209,6 +210,17 @@ function present_attributes($t, $attributes, $nameParent)
                     $str .= '<img src="data:image/jpeg;base64,' .
                         htmlspecialchars($value[0]) .
                         '" alt="User photo" />';
+                } elseif ($nameraw === 'termsAccepted') {
+                    $str .='<div><input type="checkbox" value="hasAcceptedTerms" class="form-control" name="'.$nameraw.'" ';
+                    if ($value[0] === true ) {
+                        $str  .= ' checked ';
+                    }
+                    $str .=' />';
+                    $str .= '<span class="mandatory">'.
+                    $t->t('{themeopenminted:consent:terms_field_error}').
+                    '</span>';
+                    $str .= '</div>';
+
                 } elseif ($editable) {
                     $str .='<div><input name="'.$nameraw.'" class="form-control" value="'.$value[0].'"></div>';
                 } elseif ($missing) {
@@ -225,6 +237,7 @@ function present_attributes($t, $attributes, $nameParent)
                 } else {
                     $str .= htmlspecialchars($value[0]);
                 }
+
             } // end of if multivalue
             $str .= '</div>';
             $str .= '</td></tr>';

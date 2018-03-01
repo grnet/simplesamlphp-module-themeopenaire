@@ -367,7 +367,7 @@ body .ssp-modal-body {
     display: block;
 }
 
-input[type="radio"] {
+input.form-control[type="radio"], input.form-control[type="checkbox"] {
     margin: 4px 8px;
     width: auto;
     display: inline-block;

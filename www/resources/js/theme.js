@@ -51,6 +51,14 @@ function handleMail(el) {
   }
 }
 
+function handleTerms(el) {
+  if (el.is(':checked')) {
+    el.parent('div').removeClass('error-mandatory');
+  } else {
+    el.parent('div').addClass('error-mandatory');
+  }
+}
+
 
 
 $(document).ready(function() {
@@ -93,6 +101,11 @@ $(document).ready(function() {
     mailInputs.each(function(key, input) {
       handleMail($(input));
     });
+    // If termsAccepted checkbox exists, check if the user has accepted terms
+    var termsInput = $('input[name="termsAccepted"]')[0];
+    if (termsInput) {
+      handleTerms($(termsInput));
+    }
 
     // Do not submit form if there are any errors
     if (parseInt($('.error-mandatory').length) + parseInt($('.error-mail').length)>0) { 
@@ -120,6 +133,10 @@ $(document).ready(function() {
 
   $('input[name="mail"]').bind("keyup change", function(e) {
       handleMail($(this));
+  })
+
+  $('input[name="termsAccepted"]').bind("keyup change", function(e) {
+      handleTerms($(this));
   })
 
 
