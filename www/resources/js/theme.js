@@ -121,6 +121,9 @@ $(document).ready(function() {
         var value = $(input).val().trim();
         data[name] = value;
       });
+      if ($('input[type="radio"][name="mail"]:checked')) {
+        data['mail'] = $('input[type="radio"][name="mail"]:checked').val();
+      }
       $('input[name="userData"]').val(JSON.stringify(data));
       $('#loader').show();
     }
