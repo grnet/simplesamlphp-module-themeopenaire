@@ -220,11 +220,18 @@ function present_attributes($t, $attributes, $nameParent)
                         $str  .= ' checked ';
                     }
                     $str .=' />';
+                    if (!empty($t->data['termsName'])) {
+                        $str .=' ' . $t->data['termsName'];
+                    }
                     $str .= '<span class="mandatory">'.
                     $t->t('{themeopenminted:consent:terms_field_error}').
                     '</span>';
                     $str .= '</div>';
-
+                    if (!empty($t->data['termsUrl'])) {
+                        $str .='<div><i class="ssp-form--hint">';
+                        $str .= $t->t('{themeopenminted:consent:accept_terms_tip}');
+                        $str .= ' <a href="' . $t->data['termsUrl'] . '" target="_blank">'.$t->t('{themeopenminted:consent:terms_link_tip}').'</a>.</i></div>';
+                    }
                 } elseif ($editable) {
                     $str .='<div><input name="'.$nameraw.'" class="form-control" value="'.$value[0].'"></div>';
                 } elseif ($missing) {

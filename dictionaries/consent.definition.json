@@ -19,6 +19,11 @@
   },
   "multiple_mails_tip": {
     "en": "Choose your primary email address"
+  },
+  "accept_terms_tip": {
+    "en": "Before continuing, you must agree to these terms. Please read them carefully"
+  },
+  "terms_link_tip": {
+    "en": "here"
   }
-
 }
