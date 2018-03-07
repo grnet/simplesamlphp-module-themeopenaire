@@ -121,9 +121,13 @@ function present_attributes($t, $attributes, $nameParent)
         'displayName',
         'mail',
         'eduPersonScopedAffiliation',
+        'o',
+        'consentO',
         'eduPersonEntitlement',
+        'Entitlement',
         'eduPersonAssurance',
         'eduPersonUniqueId',
+        'termsAccepted',
     );
     $newAttributes = array();
     foreach ($attributeOrder as $attrKey) {
