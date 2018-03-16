@@ -190,7 +190,6 @@ $or_html = '<div class="row ssp-content-group">
 $edugain_html = '';
 $local_html ='';
 $idps_with_logo_html = '';
-
 if (!empty($faventry)) {
   echo('
     <div class="modal fade" id="favourite-modal" tabindex="-1" role="dialog">
@@ -297,9 +296,11 @@ foreach( $this->data['idplist'] AS $tab => $slist) {
 }
     echo $edugain_html . $idps_with_logo_html . $or_html . $local_html;
 ?>
-
-
-  <p class="ssp-signup text-center">Need an account? <a href="http://beta.services.openaire.eu:8380/uoa-user-management/register.jsp">Sign up</a></p>
+  <p class="ssp-signup text-center">Need an account?
+    <a href=<?php echo $this->t('{themeopenaire:discopower:sign_up_url}'); ?> >
+      Sign up
+    </a>
+  </p>
 </div> <!-- /ssp-container-small -->
 
 <?php $this->includeAtTemplateBase('includes/footer.php');
