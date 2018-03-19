@@ -296,7 +296,8 @@ foreach( $this->data['idplist'] AS $tab => $slist) {
 }
     echo $edugain_html . $idps_with_logo_html . $or_html . $local_html;
 ?>
-  <p class="ssp-signup text-center">Need an account?
+  <p class="ssp-signup text-center">
+    Need an account?
     <a href=<?php echo $this->t('{themeopenaire:discopower:sign_up_url}'); ?> >
       Sign up
     </a>
