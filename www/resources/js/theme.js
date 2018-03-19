@@ -100,6 +100,7 @@ $(document).ready(function() {
   resizeAll();
   // loader for discopower view
   $('#loader').delay(300).fadeOut('slow', function() {
+    $('#loader').siblings().show();
     var setLang = getCookie('setLang');
     if (setLang) {
       $('#edugain-modal').modal('show');
@@ -157,6 +158,7 @@ $(document).ready(function() {
       }
       $('input[name="userData"]').val(JSON.stringify(data));
       $('#loader').show();
+      $('#loader').siblings().hide();
     }
 
   })
