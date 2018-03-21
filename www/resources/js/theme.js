@@ -153,11 +153,14 @@ $(document).ready(function() {
         var value = $(input).val().trim();
         data[name] = value;
       });
-      if ($('input[type="radio"][name="mail"]:checked')) {
-        data['mail'] = $('input[type="radio"][name="mail"]:checked').val();
+      var mailRadio = $('input[type="radio"][name="mail"]:checked')
+      var hasMultiple = mailRadio.length > 0;
+      if (hasMultiple) {
+        data['mail'] = mailRadio.val();
       }
       $('input[name="userData"]').val(JSON.stringify(data));
       $('#loader').show();
+
       $('#loader').siblings().hide();
     }
 
