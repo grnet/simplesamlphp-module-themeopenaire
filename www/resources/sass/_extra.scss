@@ -465,13 +465,13 @@ input.form-control[type="radio"], input.form-control[type="checkbox"] {
 
  .ssp-signup {
     @extend .font-smooth;
-    padding-top: 2px;
-    font-style: italic;
-    color: #90929D;
+    padding: 6px;
+    color: $text-color;
+    font-size: 15px;
     a {
-        color: #cbcbcb;
+        color: $link-color;
         &:hover {
-            color: #767779;
+            color: $link-color-hover;
         }
     }
 
