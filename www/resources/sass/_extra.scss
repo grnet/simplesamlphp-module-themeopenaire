@@ -7,8 +7,12 @@
 
  */
 @import url('https://fonts.googleapis.com/css?family=Lato:400,300,300i');
+@import url('https://fonts.googleapis.com/css?family=Raleway|Raleway+Dots');
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400|Roboto+Condensed:300,400,700|Open+Sans:300, 600');
 $lato : 'Lato', serif;
-
+$openSans: 'Open Sans', sans-serif;
+$raleway: 'Raleway', sans-serif;
+$roboto: 'Roboto', sans-serif;
 
 // Overall
 
@@ -23,11 +27,11 @@ body {
     display: flex;
     min-height: 100vh;
     flex-direction: column;
+
 }
 
 .ssp-container {
     flex: 1;
-    margin-top: 12px;
 }
 
 .header, .ssp-footer {
@@ -52,13 +56,16 @@ form {
     margin: 0;
 }
 
+.ssp-text-left {
+    text-align: left!important;
+}
+
 
 // Headings
 // No use of bem, when we want to override every instance of them
 
-$headers-font-weight: 300;
-$headers_margin_top: 10px;
-
+$header-font-weight: 300;
+$headers_margin_top: 50px;
 .ssp-logo {
     margin-top: $headers_margin_top;
     a {
@@ -69,22 +76,25 @@ $headers_margin_top: 10px;
         }
     }
     img {
-       height: $logo-height;
+       width: $logo-width;
     }
 }
 
 .headers-text {
-    font-weight: $headers-font-weight;
+    font-weight: $header-font-weight;
     font-family: $lato;
-    letter-spacing: 2px;
     margin-top: $headers_margin_top;
 }
 
 h1 {
     @extend .headers-text;
-    font-size: 30px;
+    font-size: 36px;
     text-transform: none!important;
-    margin-bottom: 0;
+    margin: 0;
+    &.disco {
+        color: $alt-text;
+        font-family: $openSans;
+    }
 }
 
 
@@ -108,6 +118,12 @@ h2 {
 h3 {
     @extend .headers-text;
     font-size: 16px;
+    &.disco {
+        @extend .font-smooth;
+        font-family: $raleway;
+        color: $light-gray;
+        margin-top: 20px;
+    }
 }
 
 h4 {
@@ -141,77 +157,63 @@ h2.subtle {
 }
 
 .ssp-lang-container {
-    position: absolute;
-    left: 30px;
-}
-
-@media screen and (max-width: 600px) {
-    .ssp-lang-container {
-        position: static;
-    }
+    display: inline-block;
+    // position: absolute;
+    // bottom: -10px;
+    // right: 24px;
 }
 
 
 // Buttons
 
-$margin-btn: 2px;
-$btn-distance: 12px;
+$margin-btn: 20px;
+$btn-distance: 10px;
+$btn-img-height: 36px;
+$btn-img-copy-height: 20px;
 .ssp-btn {
     @extend .font-smooth;
+    border-radius: 2px;
     letter-spacing: 1px;
-    font-size: 11px;
-    padding: 12px 18px;
-    line-height: 1.4;
-    border-radius: 0;
-    border: 1px solid;
-    margin: $margin-btn;
+    font-size: 13px;
+    padding: 15px;
+    line-height: 40px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.07);
+    border: 0 none;
+    margin-bottom: $margin-btn;
     white-space: normal;
+    color: $scorpion;
+    font-family: $roboto;
+    &:hover, &:focus, &:active {
+        color: $btn-action;
+        box-shadow: 0 6px 50px rgba(0,0,0,0.05);
+    }
     .caret {
         margin-left: 12px;
     }
+    @at-root &__lg {
+        width: 100%;
+        margin: 0;
+    }
     @at-root &__action {
-        background-color: $white;
-        color: darken($btn-action, 10%);
-        border-color: $btn-action;
-        &:focus, &:active {
-            background-color: $btn-action;
-            color: $white;
-            border-color: transparent;
-        }
-        &:hover {
-            background-color: $btn-action;
-            color: $white;
-            border-color: transparent;
+        &:focus, &:active, &:hover {
+            color: $btn-action;
         }
     }
     @at-root &__secondary {
-        background-color: $white;
-        color: $gray;
-        border-color: $mouse;
-        &:focus, &:active {
-            background-color: $mouse;
-            color: $white;
-            border-color: transparent;
-        }
-        &:hover {
-            background-color: $mouse;
-            color: $white;
-            border-color: transparent;
+        &:focus, &:active, &:hover {
+            color: $mouse;
         }
     }
     @at-root &__warning {
-        background-color: $white;
         color: $btn-warning;
-        border-color: $btn-warning;
-        &:focus, &:active {
-            background-color: $btn-warning;
-            color: $white;
-            border-color: transparent;
-        }
-        &:hover {
-            background-color: $btn-warning;
-            color: $white;
-            border-color: transparent;
+    }
+    @at-root &__lg {
+        img {
+            height: $btn-img-height;
+            margin-right: $btn-distance;
+            &.round {
+                border-radius: $btn-img-height/2;
+            }
         }
     }
     @at-root &__footer {
@@ -223,17 +225,24 @@ $btn-distance: 12px;
             border-color: $silver;
         }
     }
-    $btn-img-height: 36px;
-    $btn-img-copy-height: 20px;
     &--round-icon {
         padding: 0;
         display: inline-block;
-        margin-right: $btn-distance*2;
         margin-top: $btn-distance/2;
+        margin-bottom: $btn-distance/2;
         border-radius: $btn-img-height/2;
+        &:not(:last-child) {
+            margin-right: $btn-distance*2;
+        }
         img {
             height: $btn-img-height;
             border-radius: $btn-img-height/2;
+        }
+    }
+    &--horizontal-icon {
+        padding: 6px 34px;
+        img {
+            height: $btn-img-height;
         }
     }
     &--copy {
@@ -276,13 +285,13 @@ $btn-distance: 12px;
 // Content
 
 .ssp-content-group {
-    margin-bottom: 6px;
-    padding: 12px 42px;
+    margin-bottom: 18px;
+    margin-top: 18px;
     &__provider-list {
         overflow: auto;
         &--edugain {
             padding: 6px 6px 6px 42px;
-            height: 23vh;
+            height: 400px;
             a {
                 display: block;
                 position: relative;
@@ -293,11 +302,17 @@ $btn-distance: 12px;
             }
         }
         &--other {
-            padding: 2px 6px 2px 54px;
             a {
                 display: inline-block;
                 position: relative;
                 padding: 0;
+            }
+        }
+        &--local {
+            padding: 2px 6px 2px 54px;
+            a {
+                display: inline-block;
+                position: relative;
             }
         }
     }
@@ -334,9 +349,12 @@ $btn-distance: 12px;
 }
 
 .ssp-or {
-    font-size: 22px;
+    @extend .font-smooth;
+    font-family: $raleway;
+    font-size: 16px;
     color: $manatee;
-    margin: 15px;
+    margin-top: 40px;
+    margin-bottom: 40px;
 }
 
 body .ssp-modal-body {
@@ -366,3 +384,96 @@ body .ssp-modal-body {
 .error-mail span.mail {
     display: block;
 }
+
+input.form-control[type="radio"], input.form-control[type="checkbox"] {
+    margin: 4px 8px;
+    width: auto;
+    display: inline-block;
+    height: auto;
+    border: 0 none;
+}
+
+.ssp-form--hint {
+    color: #989393;
+}
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Firefox < 16 */
+@-moz-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Safari, Chrome and Opera > 12.1 */
+@-webkit-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Internet Explorer */
+@-ms-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Opera < 12.1 */
+@-o-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+ .modal.fade .modal-dialog {
+// When fading in the modal, animate it to slide down
+      -webkit-transform: translate(0, 0);
+      -ms-transform: translate(0, 0); // IE9 only
+          transform: translate(0, 0);
+}
+ .modal.fade.in .modal-dialog {
+  -webkit-animation: fadein 0.5s; /* Safari, Chrome and Opera > 12.1 */
+       -moz-animation: fadein 0.5s; /* Firefox < 16 */
+        -ms-animation: fadein 0.5s; /* Internet Explorer */
+         -o-animation: fadein 0.5s; /* Opera < 12.1 */
+            animation: fadein 0.5s;
+ }
+
+ .container {
+    // max-width: 375px;
+ }
+
+ .ssp-link-forgot {
+    @extend .font-smooth;
+    &.pull-right {
+        float: right;
+    }
+    &.pull-left {
+        float: left;
+    }
+ }
+
+ .ssp-btn__login {
+    margin-top: 18px;
+ }
+
+ .ssp-container-small {
+    max-width: 280px;
+    margin: 0 auto;
+ }
+
+ .ssp-signup {
+    @extend .font-smooth;
+    padding: 6px;
+    color: $text-color;
+    font-size: 15px;
+    a {
+        color: $link-color;
+        &:hover {
+            color: $link-color-hover;
+        }
+    }
+
+
+ }

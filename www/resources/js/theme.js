@@ -31,10 +31,12 @@ function resizeAll() {
 
 // Toggle error class to input parent div if empty
 function handleMandatory(el) {
-  if (el.val().trim().length === 0) {
-    el.parent('div').addClass('error-mandatory');
-  } else {
-    el.parent('div').removeClass('error-mandatory');
+  if ($(el).siblings('span.mandatory').length >0) {
+    if (el.val().trim().length === 0) {
+      el.parent('div').addClass('error-mandatory');
+    } else {
+      el.parent('div').removeClass('error-mandatory');
+    }
   }
 }
 
@@ -49,7 +51,40 @@ function handleMail(el) {
   }
 }
 
+function handleTerms(el) {
+  if (el.is(':checked')) {
+    el.parent('div').removeClass('error-mandatory');
+  } else {
+    el.parent('div').addClass('error-mandatory');
+  }
+}
 
+function getCookie(cname) {
+  var name = cname + "=";
+  var decodedCookie = decodeURIComponent(document.cookie);
+  var ca = decodedCookie.split(';');
+  for(var i = 0; i <ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
+
+function setCookie(cname, cvalue, exdays) {
+  var d = new Date();
+  d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+  var expires = "expires="+d.toUTCString();
+  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+function deleteCookie(cname) {
+  document.cookie = cname + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;path=/';
+};
 
 $(document).ready(function() {
 
@@ -65,7 +100,14 @@ $(document).ready(function() {
   resizeAll();
   // loader for discopower view
   $('#loader').delay(300).fadeOut('slow', function() {
-    $('#favourite-modal').modal('show');
+    $('#loader').siblings().show();
+    var setLang = getCookie('setLang');
+    if (setLang) {
+      $('#edugain-modal').modal('show');
+      deleteCookie('setLang');
+    } else {
+      $('#favourite-modal').modal('show');
+    }
   });
 
   // hide modal smoothly
@@ -82,7 +124,7 @@ $(document).ready(function() {
 
   $('button[name="yes"]').click(function(e){
     var inputs = $('input.form-control');
-    // Check if mandatory input field is empty 
+    // Check if mandatory input field is empty
     inputs.each(function(key, input) {
       handleMandatory($(input));
     });
@@ -91,27 +133,35 @@ $(document).ready(function() {
     mailInputs.each(function(key, input) {
       handleMail($(input));
     });
+    // If termsAccepted checkbox exists, check if the user has accepted terms
+    var termsInput = $('input[name="termsAccepted"]')[0];
+    if (termsInput) {
+      handleTerms($(termsInput));
+    }
 
     // Do not submit form if there are any errors
-    if (parseInt($('.error-mandatory').length) + parseInt($('.error-mail').length)>0) { 
+    if (parseInt($('.error-mandatory').length) + parseInt($('.error-mail').length)>0) {
       return false;
     }
 
-    // If the user has filled in inputs, show loader and fill hiden 
+    // If the user has filled in inputs, show loader and fill hiden
     // `userData` input with user data
     if (inputs.length > 0) {
       var data = {};
-      var url = '../themeopenminted/dummy.php';
       inputs.each(function(key, input) {
         var name = $(input).attr('name');
         var value = $(input).val().trim();
-        if (name === 'eduPersonScopedAffiliation') {
-          value = 'member@'+value;
-        }
         data[name] = value;
       });
+      var mailRadio = $('input[type="radio"][name="mail"]:checked')
+      var hasMultiple = mailRadio.length > 0;
+      if (hasMultiple) {
+        data['mail'] = mailRadio.val();
+      }
       $('input[name="userData"]').val(JSON.stringify(data));
       $('#loader').show();
+
+      $('#loader').siblings().hide();
     }
 
   })
@@ -124,5 +174,18 @@ $(document).ready(function() {
       handleMail($(this));
   })
 
+  $('input[name="termsAccepted"]').bind("keyup change", function(e) {
+      handleTerms($(this));
+  })
+
+  $('#edugain-modal').on('shown.bs.modal', function(e) {
+    $('#query_edugain').liveUpdate('#list_edugain');
+  });
+
+  $('.js-pick-language').click(function(e) {
+    e.preventDefault();
+    setCookie('setLang', true)
+    window.location = $(this).attr('href');
+  });
 
 });

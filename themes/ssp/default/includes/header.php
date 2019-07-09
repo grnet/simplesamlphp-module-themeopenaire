@@ -54,7 +54,7 @@ if(array_key_exists('header', $this->data)) {
 ?></title>
 
   <link rel="stylesheet" type="text/css" href="<?php echo htmlspecialchars(SimpleSAML_Module::getModuleURL('themeopenaire/resources/css/app.css')); ?>" />
-  <link rel="shortcut icon" href="<?php echo htmlspecialchars(SimpleSAML_Module::getModuleURL('themeopenaire/resources/images/favicon.png')); ?>"  />
+  <link rel="shortcut icon" href="<?php echo htmlspecialchars(SimpleSAML_Module::getModuleURL('themeopenaire/resources/images/favicon.ico')); ?>"  />
 
 <?php
 
@@ -129,8 +129,7 @@ if($onLoad !== '') {
     </a>
   </div>
 </div> <!-- /header -->
-<div class="ssp-container" id="content">
-<div class="container js-spread">
+<div class=" ssp-container container js-spread" id="content">
 
 
 <?php

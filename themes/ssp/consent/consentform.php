@@ -106,10 +106,14 @@ function present_attributes($t, $attributes, $nameParent)
         $str = '<div class="ssp-attrs--container"><table id="table_with_attributes"  class="table ssp-table" '. $summary .'>';
     }
 
-    $mandatoryAttributeNames = array("sn", "mail", "givenName", "eduPersonScopedAffiliation");
+    $mandatoryAttributeNames = array("sn", "mail", "givenName");
     $mandatoryAttributes = array();
+    $editableAttributes = array("consentO");
     foreach($mandatoryAttributeNames as $el) {
         $mandatoryAttributes[$el] = array("");
+    }
+    if (empty($attributes['consentO']) && empty($attributes['o']) && empty($attributes['eduPersonScopedAffiliation']) && empty($attributes['eduPersonEntitlement'])) {
+        $attributes['consentO'] = array("");
     }
 
     $attributes = array_merge($mandatoryAttributes, $attributes);
@@ -120,9 +124,13 @@ function present_attributes($t, $attributes, $nameParent)
         'displayName',
         'mail',
         'eduPersonScopedAffiliation',
+        'o',
+        'consentO',
         'eduPersonEntitlement',
+        'Entitlement',
         'eduPersonAssurance',
         'eduPersonUniqueId',
+        'termsAccepted',
     );
     $newAttributes = array();
     foreach ($attributeOrder as $attrKey) {
@@ -137,10 +145,12 @@ function present_attributes($t, $attributes, $nameParent)
 
     foreach ($attributes as $name => $value) {
         $nameraw = $name;
-        $affliation = $name === 'eduPersonScopedAffiliation'; 
+        $affliation = $name === 'eduPersonScopedAffiliation';
         $name = $t->getAttributeTranslation($parentStr . $nameraw);
         $missing = $value[0] === '' && in_array($nameraw, $mandatoryAttributeNames);
+        $editable = in_array($nameraw, $editableAttributes);
         $isHidden = in_array($nameraw, $t->data['hiddenAttributes'], true);
+
 
 
         if ($isHidden) {
@@ -156,7 +166,7 @@ function present_attributes($t, $attributes, $nameParent)
             }
         } else {
             // insert values directly
-            
+
             if ($affliation) {
                 $str .= "\n" . '<tr class="' . $alternate[($i++ % 2)] .
                     '"><td><div class="attrname ssp-table--attrname">' . $t->t('{themeopenaire:consent:affiliation_input_label}');
@@ -174,22 +184,59 @@ function present_attributes($t, $attributes, $nameParent)
             if (sizeof($value) > 1) {
                 // we hawe several values
                 $str .= '<ul class="list-unstyled ssp-table--attrvalue--list">';
+                $index = 0;
                 foreach ($value as $listitem) {
+                    $index++;
                     if ($nameraw === 'jpegPhoto') {
                         $str .= '<li class="ssp-table--attrvalue--list--item"><img src="data:image/jpeg;base64,' .
                             htmlspecialchars($listitem) .
                             '" alt="User photo" /></li>';
+                    } elseif ($nameraw === 'mail') {
+                        $str .= '<li class="ssp-table--attrvalue--list--item">';
+                        $str .= '<label for="mail'.$index.'">';
+                        $str .= '<input type="radio" class="form-control" name="mail" value="'.$listitem.'" id="mail'.$index.'" ';
+                        if ($index === 1) {
+                            $str .= 'checked';
+                        }
+                        $str .= ' >';
+                        $str .= $listitem;
+                        $str .= '</label>';
                     } else {
                         $str .= '<li class="ssp-table--attrvalue--list--item">' . htmlspecialchars($listitem) . '</li>';
                     }
                 }
                 $str .= '</ul>';
+                if ($nameraw === 'mail') {
+                    $str .='<i class="ssp-form--hint">';
+                    $str .= $t->t('{themeopenaire:consent:multiple_mails_tip}');
+                    $str .='</i>';
+                }
             } elseif (isset($value[0])) {
                 // we hawe only one value
                 if ($nameraw === 'jpegPhoto') {
                     $str .= '<img src="data:image/jpeg;base64,' .
                         htmlspecialchars($value[0]) .
                         '" alt="User photo" />';
+                } elseif ($nameraw === 'termsAccepted') {
+                    $str .='<div><input type="checkbox" value="hasAcceptedTerms" class="form-control" name="'.$nameraw.'" ';
+                    if ($value[0] === true ) {
+                        $str  .= ' checked ';
+                    }
+                    $str .=' />';
+                    if (!empty($t->data['termsName'])) {
+                        $str .=' ' . $t->data['termsName'];
+                    }
+                    $str .= '<span class="mandatory">'.
+                    $t->t('{themeopenaire:consent:terms_field_error}').
+                    '</span>';
+                    $str .= '</div>';
+                    if (!empty($t->data['termsUrl'])) {
+                        $str .='<div><i class="ssp-form--hint">';
+                        $str .= $t->t('{themeopenaire:consent:accept_terms_tip}');
+                        $str .= ' <a href="' . $t->data['termsUrl'] . '" target="_blank">'.$t->t('{themeopenaire:consent:terms_link_tip}').'</a>.</i></div>';
+                    }
+                } elseif ($editable) {
+                    $str .='<div><input name="'.$nameraw.'" class="form-control" value="'.$value[0].'"></div>';
                 } elseif ($missing) {
                     $str .='<div><input name="'.$nameraw.'" class="form-control">';
                     $str .='<span class="mandatory">'.
@@ -204,6 +251,7 @@ function present_attributes($t, $attributes, $nameParent)
                 } else {
                     $str .= htmlspecialchars($value[0]);
                 }
+
             } // end of if multivalue
             $str .= '</div>';
             $str .= '</td></tr>';

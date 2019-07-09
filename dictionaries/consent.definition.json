@@ -5,14 +5,25 @@
   "mail_field_error": {
     "en": "Error in email"
   },
+  "terms_field_error": {
+    "en": "You must agree to continue"
+  },
   "affiliation_input_label": {
-    "en": "Home organization"
+    "en": "Organisation name"
   },
   "header": {
     "en": "We will be using the information below"
   },
   "subheader": {
     "en": "Please fill all missing information"
+  },
+  "multiple_mails_tip": {
+    "en": "Choose your primary email address"
+  },
+  "accept_terms_tip": {
+    "en": "Before continuing, you must agree to these terms. Please read them carefully"
+  },
+  "terms_link_tip": {
+    "en": "here"
   }
-
 }
