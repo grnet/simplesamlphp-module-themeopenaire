@@ -119,15 +119,21 @@ if (isset($this->data['onLoad'])) {
 if($onLoad !== '') {
   $onLoad = ' onload="' . $onLoad . '"';
 }
+
+global $logo_hide;
 ?>
 <body<?php echo $onLoad; ?>>
 
 <div class="header">
+  <?php if(!isset($logo_hide) || !$logo_hide): ?>
   <div class="text-center ssp-logo">
     <a href="https://www.openaire.eu/">
       <img src="<?php echo SimpleSAML_Module::getModuleURL('themeopenaire/resources/images/logo.png'); ?>" alt="OpenAIRE" />
     </a>
   </div>
+  <?php else:?>
+  <div class="no-logo">
+  <?php endif; ?>
 </div> <!-- /header -->
 <div class=" ssp-container container js-spread" id="content">
 
