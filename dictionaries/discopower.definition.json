@@ -1,12 +1,32 @@
 {
-  "header": {
-    "en": "Single Sign On"
+  "title": {
+    "en": "Log in with your academic/social account"
   },
-  "subheader": {
-    "en": "Use the same credentials for all our services"
+  "or": {
+    "en": "or"
   },
-  "sign_up_url": {
-    "en": "https://beta.services.openaire.eu/uoa-user-management/register.jsp"
+  "favourite_dialog_title": {
+    "en": "NI4OS-Europe Login"
+  },
+  "favourite_dialog_button_close": {
+    "en": "Choose another account"
+  },
+  "copyright_year_start": {
+    "en": "2019"
+  },
+  "cookies_link_text": {
+    "en": "cookie policy."
+  },
+  "cookies_text": {
+    "en": "We use cookies to identify you, thereby enabling us to grant you access to the services and resources provided for NI4OS-Europe, and also to improve your experience on our site. To find out more, read our "
+  },
+  "cookies_accept_btn_text": {
+    "en": "OK"
+  },
+  "cookies_link_url": {
+    "en": "../themevanilla/policy.php"
+  },
+  "login_with": {
+    "en": "Log in with"
   }
 }
-

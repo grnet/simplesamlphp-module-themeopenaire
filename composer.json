@@ -1,8 +1,13 @@
 {
-  "name": "grent/simplesamlphp-module-themeopenaire",
-  "description": "A theme for SimpleSAMLphp based on Bootstrap",
+  "name": "rciam/simplesamlphp-module-themevanilla",
+  "description": "A customisable theme for SimpleSAMLphp based on Bootstrap",
   "type": "simplesamlphp-module",
-  "keywords": ["simplesamlphp", "module", "theme", "bootstrap"],
+  "keywords": [
+    "bootstrap",
+    "module",
+    "simplesamlphp",
+    "theme"
+  ],
   "license": "Apache License 2.0",
   "authors": [
     {
