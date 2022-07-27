@@ -3,6 +3,6 @@
     "en": "Access forbidden"
   },
   "403_text": {
-    "en": "You don't have the needed privileges to access this application. Please contact <a href=\"mailto:faai@grnet.gr\">NI4OS-Europe Login support</a> if you find this to be incorrect."
+    "en": "You don't have the needed privileges to access this application. Please contact <a href=\"mailto:faai@grnet.gr\">OpenAIRE Login support</a> if you find this to be incorrect."
   }
 }
