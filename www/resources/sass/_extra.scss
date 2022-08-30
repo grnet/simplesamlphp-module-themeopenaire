@@ -477,3 +477,49 @@ input.form-control[type="radio"], input.form-control[type="checkbox"] {
 
 
  }
+
+// #cookies
+#cookies {
+    display: none;
+}
+
+#cookies-wrapper {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 1000;
+    display: flex;
+    border: 1px solid #90929D;
+    padding: 20px;
+    justify-content: center;
+    background: #eee;
+    p {
+        margin: 0;
+        position: relative;
+        padding: 0;
+    }
+    .cookies-ok {
+        display: block;
+        margin: 0 0 0 20px;
+        padding: 10px;
+        background: #0a559c;
+        color: white;
+        align-self: center;
+        font-size: 11px;
+        &:hover {
+            text-decoration: none;
+            opacity: 0.9;
+        }
+    }
+}
+
+
+@media screen and (max-width: 600px ) {
+    #cookies-wrapper {
+        flex-direction: column;
+        .cookies-ok {
+            margin: 20px 0 0 ;
+        }
+    }
+}

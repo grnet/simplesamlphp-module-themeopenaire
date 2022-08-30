@@ -87,20 +87,21 @@ function deleteCookie(cname) {
 };
 
 $(document).ready(function() {
+  if (!getCookie('cookies_accepted')) {
+    $('#cookies').show();
+  }
 
   var has_form = $('input.form-control').length > 0;
   if (!has_form) {
     $('h2 small').hide();
   }
 
-
-
   $('[data-toggle="tooltip"]').tooltip();
 
   resizeAll();
   // loader for discopower view
   $('#loader').delay(300).fadeOut('slow', function() {
-    $('#loader').siblings().show();
+    $('#loader').siblings().not($('#cookies')).show();
     var setLang = getCookie('setLang');
     if (setLang) {
       $('#edugain-modal').modal('show');
@@ -184,8 +185,14 @@ $(document).ready(function() {
 
   $('.js-pick-language').click(function(e) {
     e.preventDefault();
-    setCookie('setLang', true)
+    setCookie('setLang', true);
     window.location = $(this).attr('href');
   });
+
+  $('#js-accept-cookies').click(function(e){
+    e.preventDefault();
+    $('#cookies').hide();
+    setCookie('cookies_accepted', true);
+  })
 
 });
