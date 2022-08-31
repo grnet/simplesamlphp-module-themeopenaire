@@ -112,7 +112,10 @@ function present_attributes($t, $attributes, $nameParent)
     foreach($mandatoryAttributeNames as $el) {
         $mandatoryAttributes[$el] = array("");
     }
-    if (empty($attributes['consentO']) && empty($attributes['o']) && empty($attributes['eduPersonScopedAffiliation']) && empty($attributes['eduPersonEntitlement'])) {
+    if (empty($attributes['consentO'])
+        && empty($attributes['o'])
+        && empty($attributes['eduPersonScopedAffiliation'])
+        && empty($attributes['eduPersonEntitlement'])) {
         $attributes['consentO'] = array("");
     }
 
@@ -123,6 +126,7 @@ function present_attributes($t, $attributes, $nameParent)
         'givenName',
         'displayName',
         'mail',
+        'eduPersonOrcid',  // TODO: This should be a configurable list
         'eduPersonScopedAffiliation',
         'o',
         'consentO',
@@ -182,7 +186,7 @@ function present_attributes($t, $attributes, $nameParent)
             $str .= '<div class="attrvalue ssp-table--attrvalue">';
 
             if (sizeof($value) > 1) {
-                // we hawe several values
+                // we have several values
                 $str .= '<ul class="list-unstyled ssp-table--attrvalue--list">';
                 $index = 0;
                 foreach ($value as $listitem) {
