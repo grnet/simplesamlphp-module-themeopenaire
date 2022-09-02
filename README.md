@@ -147,6 +147,15 @@ You can read more about themes in a SimpleSAMLphp installation from the
 [official documentation](https://simplesamlphp.org/docs/stable/simplesamlphp-theming).
 
 
+## Compatibility matrix
+
+This table matches the module version with the supported SimpleSAMLphp version.
+
+| Module   |  SimpleSAMLphp |
+|:--------:|:--------------:|
+| v1.x     | v1.14          |
+
+
 ## License
 
 Licensed under the Apache 2.0 license, for details see `LICENSE`.
