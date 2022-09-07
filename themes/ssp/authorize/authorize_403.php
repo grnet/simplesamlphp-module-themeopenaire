@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Template which is shown when there is only a short interval since the user was last authenticated.
  *
