@@ -1,24 +1,32 @@
 {
-  "header": {
-    "en": "Single Sign On"
+  "title": {
+    "en": "Log in with your academic/social account"
   },
-  "subheader": {
-    "en": "Use the same credentials for all our services"
+  "or": {
+    "en": "or"
   },
-  "sign_up_url": {
-    "en": "https://services.openaire.eu/uoa-user-management/register.jsp"
+  "favourite_dialog_title": {
+    "en": "OpenAIRE Login"
   },
-  "cookies_text": {
-    "en": "OpenAIRE Login collects and manages personal data in order to function properly. To find out more, read our"
+  "favourite_dialog_button_close": {
+    "en": "Choose another account"
+  },
+  "copyright_year_start": {
+    "en": "2019"
   },
   "cookies_link_text": {
-    "en": "updated privacy policy"
+    "en": "cookie policy."
   },
-  "cookies_link_url": {
-    "en": "https://www.openaire.eu/privacy-policy"
+  "cookies_text": {
+    "en": "We use cookies to identify you, thereby enabling us to grant you access to the services and resources provided for OpenAIRE, and also to improve your experience on our site. To find out more, read our "
   },
   "cookies_accept_btn_text": {
     "en": "OK"
+  },
+  "cookies_link_url": {
+    "en": "../themevanilla/policy.php"
+  },
+  "login_with": {
+    "en": "Log in with"
   }
 }
-

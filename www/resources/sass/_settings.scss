@@ -1,28 +1,16 @@
-// Colors
-// Color names from: http://chir.ag/projects/name-that-color
+// background color of primary button
+$btn-action: $curious-blue; // #349bdb
+$btn-warning: $carrot-orange; // #ec971f
+$footer-bg: $white;
+$footer-text: $black;
+$footer-link: darken($link-color, 10%); // #349bdb
 
-$tradewind: #68b8b3; //green blue
-$white: #fff;
-$black: #333;
-$denim: #0d6fcc;
-$mariner: #2d72d6;
-$punch: #d53b23;
-$jacksons-purple: #232080;
-$cerulean: #00a0de;
-$blue-marine: #040067;
-// Gray
-$alabaster: #f7f7f7;
-$silver: #cdc9c9;
-$scorpion: #5b5b5b;;
-$manatee: #90929D;
-$mouse: #848484;
-$light-gray: #767779;
-
-// Bootstrap variables
-$link-color: $mariner;
-$table-border-color: transparent;
-$container-lg: 970px;
+// text and border color of button that is in the footer
+$btn-footer-text: $black;
+$btn-footer-border-hover: $silver; // #cdc9c9
 
 // tooltip colors
-$tooltip-bg: $tradewind;
+$tooltip-bg: darken($curious-blue, 20%);
 $tooltip-color: $white;
+
+$logo-height: 60px;
