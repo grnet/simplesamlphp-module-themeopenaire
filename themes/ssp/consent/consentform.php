@@ -1,330 +1,211 @@
-<div id="loader">
-  <div class="sk-circle">
-    <div class="sk-circle1 sk-child"></div>
-    <div class="sk-circle2 sk-child"></div>
-    <div class="sk-circle3 sk-child"></div>
-    <div class="sk-circle4 sk-child"></div>
-    <div class="sk-circle5 sk-child"></div>
-    <div class="sk-circle6 sk-child"></div>
-    <div class="sk-circle7 sk-child"></div>
-    <div class="sk-circle8 sk-child"></div>
-    <div class="sk-circle9 sk-child"></div>
-    <div class="sk-circle10 sk-child"></div>
-    <div class="sk-circle11 sk-child"></div>
-    <div class="sk-circle12 sk-child"></div>
-  </div>
-</div>
 <?php
+
+// Get Configuration and set the loader
+$themeConfig = SimpleSAML\Configuration::getConfig('module_themeopenaire.php');
+$loader = $themeConfig->getValue('loader');
+if (!empty($loader)) {
+    $this->includeAtTemplateBase('includes/' . $loader . '.php');
+}
+
 /**
  * Template form for giving consent.
  *
  * Parameters:
- * - 'srcMetadata': Metadata/configuration for the source.
- * - 'dstMetadata': Metadata/configuration for the destination.
  * - 'yesTarget': Target URL for the yes-button. This URL will receive a POST request.
- * - 'yesData': Parameters which should be included in the yes-request.
  * - 'noTarget': Target URL for the no-button. This URL will receive a GET request.
- * - 'noData': Parameters which should be included in the no-request.
- * - 'attributes': The attributes which are about to be released.
- * - 'sppp': URL to the privacy policy of the destination, or FALSE.
+ * - 'sppp': URL to the privacy policy of the destination, or false.
  *
  * @package SimpleSAMLphp
  */
-assert('is_array($this->data["srcMetadata"])');
-assert('is_array($this->data["dstMetadata"])');
-assert('is_string($this->data["yesTarget"])');
-assert('is_array($this->data["yesData"])');
-assert('is_string($this->data["noTarget"])');
-assert('is_array($this->data["noData"])');
-assert('is_array($this->data["attributes"])');
-assert('is_array($this->data["hiddenAttributes"])');
-assert('$this->data["sppp"] === false || is_string($this->data["sppp"])');
+
+assert(is_string($this->data['yesTarget']));
+assert(is_string($this->data['noTarget']));
+assert($this->data['sppp'] === false || is_string($this->data['sppp']));
+
+// Needed for present_attributes_ssp()
+$globalConfig = \SimpleSAML\Configuration::getInstance();
+$t = new \SimpleSAML\XHTML\Template($globalConfig, 'consent:consentform.php');
 
 // Parse parameters
-if (array_key_exists('name', $this->data['srcMetadata'])) {
-    $srcName = $this->data['srcMetadata']['name'];
-} elseif (array_key_exists('OrganizationDisplayName', $this->data['srcMetadata'])) {
-    $srcName = $this->data['srcMetadata']['OrganizationDisplayName'];
+$dstName = $this->data['dstName'];
+$srcName = $this->data['srcName'];
+
+$id = $_REQUEST['StateId'];
+$state = \SimpleSAML\Auth\State::loadState($id, 'consent:request');
+
+if (array_key_exists('consent:hiddenAttributes', $state)) {
+    $t->data['hiddenAttributes'] = $state['consent:hiddenAttributes'];
 } else {
-    $srcName = $this->data['srcMetadata']['entityid'];
+    $t->data['hiddenAttributes'] = [];
 }
-
-if (is_array($srcName)) {
-    $srcName = $this->t($srcName);
-}
-
-if (array_key_exists('name', $this->data['dstMetadata'])) {
-    $dstName = $this->data['dstMetadata']['name'];
-} elseif (array_key_exists('OrganizationDisplayName', $this->data['dstMetadata'])) {
-    $dstName = $this->data['dstMetadata']['OrganizationDisplayName'];
-} else {
-    $dstName = $this->data['dstMetadata']['entityid'];
-}
-
-if (is_array($dstName)) {
-    $dstName = $this->t($dstName);
-}
-
-$srcName = htmlspecialchars($srcName);
-$dstName = htmlspecialchars($dstName);
 
 $attributes = $this->data['attributes'];
 
 $this->data['header'] = $this->t('{consent:consent:consent_header}');
-$this->data['jquery'] = array('core' => TRUE);
+$this->data['jquery'] = ['core' => true];
 
 $this->includeAtTemplateBase('includes/header.php');
 ?>
+<h2 class="text-center"><?= $this->data['consent_accept'] ?></h2>
+<div class="row js-spread">
+    <div class="col-sm-12 ssp-content-group js-spread">
 
-<?php
-if ($this->data['sppp'] !== false) {
-    echo "<p>" . htmlspecialchars($this->t('{consent:consent:consent_privacypolicy}')) . " ";
-    echo "<a target='_blank' href='" . htmlspecialchars($this->data['sppp']) . "'>" . $dstName . "</a>";
-    echo "</p>";
-}
+        <?php
+        echo $this->data['attributes_html'] = present_attributes_ssp($t, $attributes, '');
 
-/**
- * Recursive attribute array listing function
- *
- * @param SimpleSAML_XHTML_Template $t          Template object
- * @param array                     $attributes Attributes to be presented
- * @param string                    $nameParent Name of parent element
- *
- * @return string HTML representation of the attributes
- */
-function present_attributes($t, $attributes, $nameParent)
-{
-    $alternate = array('ssp-table--tr__odd', 'ssp-table--tr__even');
-    $i = 0;
-    $summary = 'summary="' . $t->t('{consent:consent:table_summary}') . '"';
+        /**
+         * Recursive attribute array listing function
+         *
+         * @param \SimpleSAML\XHTML\Template $t          Template object
+         * @param array                      $attributes Attributes to be presented
+         * @param string                     $nameParent Name of parent element
+         *
+         * @return string HTML representation of the attributes
+         */
+        function present_attributes_ssp($t, $attributes, $nameParent)
+        {
+            $translator = $t->getTranslator();
 
-    if (strlen($nameParent) > 0) {
-        $parentStr = strtolower($nameParent) . '_';
-        $str = '<div class="ssp-attrs--container"><table class="table" ' . $summary . '>';
-    } else {
-        $parentStr = '';
-        $str = '<div class="ssp-attrs--container"><table id="table_with_attributes"  class="table ssp-table" '. $summary .'>';
-    }
+            $alternate = ['ssp-table--tr__odd', 'ssp-table--tr__even'];
+            $i = 0;
+            $summary = 'summary="' . $translator->t('{consent:consent:table_summary}') . '"';
 
-    $mandatoryAttributeNames = array("sn", "mail", "givenName");
-    $mandatoryAttributes = array();
-    $editableAttributes = array("consentO");
-    foreach($mandatoryAttributeNames as $el) {
-        $mandatoryAttributes[$el] = array("");
-    }
-    if (empty($attributes['consentO'])
-        && empty($attributes['o'])
-        && empty($attributes['eduPersonScopedAffiliation'])
-        && empty($attributes['eduPersonEntitlement'])) {
-        $attributes['consentO'] = array("");
-    }
-
-    $attributes = array_merge($mandatoryAttributes, $attributes);
-
-    $attributeOrder = array(
-        'sn',
-        'givenName',
-        'displayName',
-        'mail',
-        'eduPersonOrcid',  // TODO: This should be a configurable list
-        'eduPersonScopedAffiliation',
-        'o',
-        'consentO',
-        'eduPersonEntitlement',
-        'Entitlement',
-        'eduPersonAssurance',
-        'eduPersonUniqueId',
-        'termsAccepted',
-    );
-    $newAttributes = array();
-    foreach ($attributeOrder as $attrKey) {
-        if (!empty($attributes[$attrKey])) {
-            $newAttributes[$attrKey] = $attributes[$attrKey];
-            unset($attributes[$attrKey]);
-        }
-    }
-    $attributes = array_merge($newAttributes, $attributes);
-
-
-
-    foreach ($attributes as $name => $value) {
-        $nameraw = $name;
-        $affliation = $name === 'eduPersonScopedAffiliation';
-        $name = $t->getAttributeTranslation($parentStr . $nameraw);
-        $missing = $value[0] === '' && in_array($nameraw, $mandatoryAttributeNames);
-        $editable = in_array($nameraw, $editableAttributes);
-        $isHidden = in_array($nameraw, $t->data['hiddenAttributes'], true);
-
-
-
-        if ($isHidden) {
-            continue;
-        }
-
-        if (preg_match('/^child_/', $nameraw)) {
-            // insert child table
-            $parentName = preg_replace('/^child_/', '', $nameraw);
-            foreach ($value as $child) {
-                $str .= "\n" . '<tr class="odd ssp--table--tr__odd"><td>' .
-                    present_attributes($t, $child, $parentName) . '</td></tr>';
-            }
-        } else {
-            // insert values directly
-
-            if ($affliation) {
-                $str .= "\n" . '<tr class="' . $alternate[($i++ % 2)] .
-                    '"><td><div class="attrname ssp-table--attrname">' . $t->t('{themeopenaire:consent:affiliation_input_label}');
+            if (strlen($nameParent) > 0) {
+                $parentStr = strtolower($nameParent) . '_';
+                $str = '<div class="ssp-attrs--container"><table class="table" ' . $summary . '>';
             } else {
-                $str .= "\n" . '<tr class="' . $alternate[($i++ % 2)] .
-                    '"><td><div class="attrname ssp-table--attrname">' . htmlspecialchars($name);
+                $parentStr = '';
+                $str = '<div class="ssp-attrs--container js-spread"><table id="table_with_attributes"  class="table" '
+                . $summary . '>';
             }
-            if ($missing) {
-                $str .= ' (*)';
-            }
-            $str.= '</div>';
 
-            $str .= '<div class="attrvalue ssp-table--attrvalue">';
+            foreach ($attributes as $name => $value) {
+                $nameRaw = $name;
+                $name = $translator->getAttributeTranslation($parentStr . $nameRaw);
 
-            if (sizeof($value) > 1) {
-                // we have several values
-                $str .= '<ul class="list-unstyled ssp-table--attrvalue--list">';
-                $index = 0;
-                foreach ($value as $listitem) {
-                    $index++;
-                    if ($nameraw === 'jpegPhoto') {
-                        $str .= '<li class="ssp-table--attrvalue--list--item"><img src="data:image/jpeg;base64,' .
-                            htmlspecialchars($listitem) .
-                            '" alt="User photo" /></li>';
-                    } elseif ($nameraw === 'mail') {
-                        $str .= '<li class="ssp-table--attrvalue--list--item">';
-                        $str .= '<label for="mail'.$index.'">';
-                        $str .= '<input type="radio" class="form-control" name="mail" value="'.$listitem.'" id="mail'.$index.'" ';
-                        if ($index === 1) {
-                            $str .= 'checked';
-                        }
-                        $str .= ' >';
-                        $str .= $listitem;
-                        $str .= '</label>';
-                    } else {
-                        $str .= '<li class="ssp-table--attrvalue--list--item">' . htmlspecialchars($listitem) . '</li>';
+                if (preg_match('/^child_/', $nameRaw)) {
+                    // insert child table
+                    $parentName = preg_replace('/^child_/', '', $nameRaw);
+                    foreach ($value as $child) {
+                        $str .= "\n" . '<tr class="odd ssp--table--tr__odd"><td>' .
+                            present_attributes_ssp($t, $child, $parentName) . '</td></tr>';
                     }
-                }
-                $str .= '</ul>';
-                if ($nameraw === 'mail') {
-                    $str .='<i class="ssp-form--hint">';
-                    $str .= $t->t('{themeopenaire:consent:multiple_mails_tip}');
-                    $str .='</i>';
-                }
-            } elseif (isset($value[0])) {
-                // we hawe only one value
-                if ($nameraw === 'jpegPhoto') {
-                    $str .= '<img src="data:image/jpeg;base64,' .
-                        htmlspecialchars($value[0]) .
-                        '" alt="User photo" />';
-                } elseif ($nameraw === 'termsAccepted') {
-                    $str .='<div><input type="checkbox" value="hasAcceptedTerms" class="form-control" name="'.$nameraw.'" ';
-                    if ($value[0] === true ) {
-                        $str  .= ' checked ';
-                    }
-                    $str .=' />';
-                    if (!empty($t->data['termsName'])) {
-                        $str .=' ' . $t->data['termsName'];
-                    }
-                    $str .= '<span class="mandatory">'.
-                    $t->t('{themeopenaire:consent:terms_field_error}').
-                    '</span>';
-                    $str .= '</div>';
-                    if (!empty($t->data['termsUrl'])) {
-                        $str .='<div><i class="ssp-form--hint">';
-                        $str .= $t->t('{themeopenaire:consent:accept_terms_tip}');
-                        $str .= ' <a href="' . $t->data['termsUrl'] . '" target="_blank">'.$t->t('{themeopenaire:consent:terms_link_tip}').'</a>.</i></div>';
-                    }
-                } elseif ($editable) {
-                    $str .='<div><input name="'.$nameraw.'" class="form-control" value="'.$value[0].'"></div>';
-                } elseif ($missing) {
-                    $str .='<div><input name="'.$nameraw.'" class="form-control">';
-                    $str .='<span class="mandatory">'.
-                        $t->t('{themeopenaire:consent:mandatory_field_error}').
-                        '</span>';
-                    if ($nameraw === 'mail') {
-                        $str .= '<span class="mail">'.
-                        $t->t('{themeopenaire:consent:mail_field_error}').
-                        '</span>';
-                    }
-                    $str .='</div>';
                 } else {
-                    $str .= htmlspecialchars($value[0]);
-                }
+                    // insert values directly
 
-            } // end of if multivalue
-            $str .= '</div>';
-            $str .= '</td></tr>';
-        }	// end else: not child table
-    }	// end foreach
-    $str .= isset($attributes)? '</table></div>':'';
-    return $str;
-}
+                    $str .= "\n" . '<tr class="' . $alternate[($i++ % 2)] .
+                        '"><td><div class="attrname ssp-table--attrname">' . htmlspecialchars($name) . '</div>';
 
- echo '<h2 class="subtle text-center">' .
-      $this->t(
-        '{themeopenaire:consent:header}',
-          array( 'SPNAME' => $dstName, 'IDPNAME' => $srcName)).
-      '<small>' .
-      $this->t(
-        '{themeopenaire:consent:subheader}',
-          array( 'SPNAME' => $dstName, 'IDPNAME' => $srcName)).
+                    $isHidden = in_array($nameRaw, $t->data['hiddenAttributes'], true);
+                    if ($isHidden) {
+                        $hiddenId = \SimpleSAML\Utils\Random::generateID();
+                        $str .= '<div class="attrvalue ssp-table--attrvalue" style="display: none;" id="hidden_'
+                        . $hiddenId . '">';
+                    } else {
+                        $str .= '<div class="attrvalue ssp-table--attrvalue">';
+                    }
 
-      '</small>' .
-      '</h2>
-      <div class="row js-spread">
-          <div class="col-sm-12 ssp-content-group js-spread">';
-?>
+                    if (sizeof($value) > 1) {
+                        // we have several values
+                        $str .= '<ul class="list-unstyled ssp-table--attrvalue--list">';
+                        foreach ($value as $listItem) {
+                            if ($nameRaw === 'jpegPhoto') {
+                                $str .= '<li class="ssp-table--attrvalue--list--item">'
+                                . '<img src="data:image/jpeg;base64,'
+                                . htmlspecialchars($listItem) . '" alt="User photo" /></li>';
+                            } else {
+                                $str .= '<li class="ssp-table--attrvalue--list--item">'
+                                . htmlspecialchars($listItem) . '</li>';
+                            }
+                        }
+                        $str .= '</ul>';
+                    } elseif (isset($value[0])) {
+                        // we have only one value
+                        if ($nameRaw === 'jpegPhoto') {
+                            $str .= '<img src="data:image/jpeg;base64,' .
+                                htmlspecialchars($value[0]) . '" alt="User photo" />';
+                        } else {
+                            $str .= htmlspecialchars($value[0]);
+                        }
+                    } // end of if multivalue
+                    $str .= '</div>';
 
-<?php
-echo present_attributes($this, $attributes, '');
-?>
+                    if ($isHidden) {
+                        $str .= '<div class="attrvalue consent_showattribute" id="visible_' . $hiddenId . '">';
+                        $str .= '<a class="consent_showattributelink ssp-btn__show-more"'
+                        . ' href="javascript:SimpleSAML_show(\'hidden_' . $hiddenId;
+                        $str .= '\'); SimpleSAML_hide(\'visible_' . $hiddenId . '\');"'
+                        . ' data-toggle="tooltip" data-placement="right" title="'
+                        . $t->t('{consent:consent:show_attribute}') . '">';
+                        $str .= '<span class="glyphicon glyphicon-eye-open ssp-show-more" aria-hidden="true"></span>';
+                        $str .= '</a>';
+                        $str .= '</div>';
+                    }
 
-<form style="margin-bottom: 32px; padding: 0px"
-    action="<?php echo htmlspecialchars($this->data['yesTarget']); ?>">
-<div class="ssp-btns-container">
-<p class"ssp-btns-container--checkbox>
+                    $str .= '</td></tr>';
+                } // end else: not child table
+            } // end foreach
+            $str .= isset($attributes) ? '</table></div>' : '';
+            return $str;
+        }
+        ?>
 
-<?php
-if ($this->data['usestorage']) {
-  $checked = ($this->data['checked'] ? 'checked="checked"' : '');
-  echo '<input type="checkbox" name="saveconsent" ' . $checked .
-      ' value="1" /> ' . $this->t('{consent:consent:remember}');
-}
 
-// Embed hidden fields...
-foreach ($this->data['yesData'] as $name => $value) {
-  echo '<input type="hidden" name="' . htmlspecialchars($name) .
-      '" value="' . htmlspecialchars($value) . '" />';
-}
-?>
-    <input type="hidden" name="userData"/>
-  </p>
-  <button type="submit" name="yes" class=" ssp-btn btn ssp-btn__action ssp-btns-container--btn__left text-uppercase" id="yesbutton">
-      <?php echo htmlspecialchars($this->t('{consent:consent:yes}')) ?>
-  </button>
-</form>
+        <?php
+        if (isset($this->data['consent_purpose'])) {
+            echo '<p>' . $this->data['consent_purpose'] . '</p>';
+        }
+        ?>
 
-<form style="display: inline-block;" action="<?php echo htmlspecialchars($this->data['noTarget']); ?>"
-    method="get">
+        <div class="ssp-btns-container">
+            <form
+                id="consent_yes"
+                action="<?= htmlspecialchars($this->data['yesTarget']) ?>"
+                style="display:inline-block;"
+            >
+                <p class="ssp-btns-container--checkbox">
+                    <?php
+                    if ($this->data['usestorage']) {
+                        $checked = ($this->data['checked'] ? 'checked="checked"' : '');
+                        echo '<input type="checkbox" name="saveconsent" ' . $checked
+                        . ' value="1" /> ' . $this->t('{consent:consent:remember}');
+                    } // Embed hidden fields...
+                    ?>
+                    <input type="hidden" name="StateId" value="<?= htmlspecialchars($this->data['stateId']) ?>" />
+                </p>
+                <button
+                    type="submit"
+                    name="yes"
+                    class="ssp-btn btn ssp-btn__action ssp-btns-container--btn__left text-uppercase"
+                    id="yesbutton"
+                >
+                    <?= htmlspecialchars($this->t('{consent:consent:yes}')) ?>
+                </button>
+            </form>
 
-<?php
-foreach ($this->data['noData'] as $name => $value) {
-  echo('<input type="hidden" name="' . htmlspecialchars($name) .
-      '" value="' . htmlspecialchars($value) . '" />');
-}
-?>
-  <button type="submit" class="ssp-btn ssp-btn__secondary btn ssp-btns-container--btn__right text-uppercase" name="no" id="nobutton">
-      <?php echo htmlspecialchars($this->t('{consent:consent:no}')) ?>
-  </button>
-</form>
-</div> <!-- /ssp-btns-container -->
-</div> <!-- /ssp-content-group -->
+            <form
+                id="consent_no"
+                action="<?= htmlspecialchars($this->data['noTarget']) ?>"
+                style="display:inline-block;"
+            >
+                <input type="hidden" name="StateId" value="<?= htmlspecialchars($this->data['stateId']) ?>" />
+                <button
+                    type="submit"
+                    class="ssp-btn ssp-btn__secondary btn ssp-btns-container--btn__right text-uppercase"
+                    name="no"
+                    id="nobutton"
+                >
+                    <?= htmlspecialchars($this->t('{consent:consent:no}')) ?>
+                </button>
+            </form>
+        </div> <!-- /ssp-btns-container -->
+    </div> <!-- /ssp-content-group -->
 </div> <!-- /row -->
-<?php
+
+<?php if ($this->data['sppp'] !== false) : ?>
+<p><?= htmlspecialchars($this->t('{consent:consent:consent_privacypolicy}')) ?>
+<a target="_blank" href="<?= htmlspecialchars($this->data['sppp']) ?>"><?= $dstName ?></a>
+</p>
+<?php endif;
+
 $this->includeAtTemplateBase('includes/footer.php');
-?>

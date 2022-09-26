@@ -1,29 +1,41 @@
-
 <?php
-if(!empty($this->data['htmlinject']['htmlContentPost'])) {
-  foreach($this->data['htmlinject']['htmlContentPost'] AS $c) {
-    echo $c;
-  }
+
+$themeConfig = SimpleSAML\Configuration::getConfig('module_themeopenaire.php');
+$enableCookiesBanner = $themeConfig->getValue('enable_cookies_banner');
+
+if (!empty($this->data['htmlinject']['htmlContentPost'])) {
+    foreach ($this->data['htmlinject']['htmlContentPost'] as $c) {
+        echo $c;
+    }
 }
 ?>
-  </div><!-- /ssp-container -->
+</div><!-- /container -->
+</div><!-- /ssp-container -->
 
-<?php if(strpos($this->t('{themeopenaire:discopower:cookies_text}'), 'not translated') === false || strpos($this->t('{themeopenaire:discopower:cookies_accept_btn_text}'), 'not translated') === false): ?>
-  <!-- cookies popup -->
-  <div id="cookies">
-    <div id="cookies-wrapper">
-      <p>
-          <?php print $this->t('{themeopenaire:discopower:cookies_text}'); ?>
-          <?php if(strpos($this->t('{themeopenaire:discopower:cookies_link_text}'), 'not translated') === false): ?>
-            <a href="<?php print $this->t('{themeopenaire:discopower:cookies_link_url}'); ?>" target="_blank"><?php print $this->t('{themeopenaire:discopower:cookies_link_text}'); ?></a>
-          <?php endif; ?>
-      </p>
-      <a id="js-accept-cookies" class="cookies-ok" href="#">
-          <?php print $this->t('{themeopenaire:discopower:cookies_accept_btn_text}'); ?>
-      </a>
+<?php if ($enableCookiesBanner) : ?>
+    <!-- cookies popup -->
+    <div id="cookies">
+        <div id="cookies-wrapper">
+            <p>
+                <?= $this->t('{themeopenaire:discopower:cookies_text}') ?>
+                <?php
+                if (
+                    strpos($this->t('{themeopenaire:discopower:cookies_link_text}'), 'not translated') === false
+                ) : ?>
+                    <a
+                        href="<?= $this->t('{themeopenaire:discopower:cookies_link_url}') ?>"
+                        target="_blank"
+                    >
+                        <?= $this->t('{themeopenaire:discopower:cookies_link_text}') ?>
+                    </a>
+                <?php endif; ?>
+            </p>
+            <a id="js-accept-cookies" class="cookies-ok" href="#">
+                <?= $this->t('{themeopenaire:discopower:cookies_accept_btn_text}') ?>
+            </a>
+        </div>
     </div>
-  </div>
-  <!-- /cookies popup -->
+    <!-- /cookies popup -->
 <?php endif; ?>
 
   <footer class="ssp-footer text-center">
@@ -37,18 +49,33 @@ if(!empty($this->data['htmlinject']['htmlContentPost'])) {
       </div>
       </div> <!-- /container-fluid -->
   </footer>
-  <script type="text/javascript"
-          src="<?php echo htmlspecialchars(SimpleSAML_Module::getModuleURL('themeopenaire/resources/js/dropdown.js')); ?>">
-  </script>
-  <script type="text/javascript"
-          src="<?php echo htmlspecialchars(SimpleSAML_Module::getModuleURL('themeopenaire/resources/js/modal.js')); ?>">
-  </script>
-  <script type="text/javascript"
-          src="<?php echo htmlspecialchars(SimpleSAML_Module::getModuleURL('themeopenaire/resources/js/theme.js')); ?>">
-  </script>
-  <script type="text/javascript"
-          src="<?php echo htmlspecialchars(SimpleSAML_Module::getModuleURL('themeopenaire/resources/js/tooltip.js')); ?>">
-  </script>
+
+<script
+    type="text/javascript"
+    src="<?= htmlspecialchars(SimpleSAML\Module::getModuleURL('themeopenaire/resources/js/cookie.js')) ?>"
+>
+</script>
+<script
+    type="text/javascript"
+    src="<?= htmlspecialchars(SimpleSAML\Module::getModuleURL('themeopenaire/resources/js/dropdown.js')) ?>"
+>
+</script>
+<script
+    type="text/javascript"
+    src="<?= htmlspecialchars(SimpleSAML\Module::getModuleURL('themeopenaire/resources/js/modal.js')) ?>"
+>
+</script>
+<script
+    type="text/javascript"
+    src="<?= htmlspecialchars(SimpleSAML\Module::getModuleURL('themeopenaire/resources/js/tooltip.js')) ?>"
+>
+</script>
+<script
+    type="text/javascript"
+    src="<?= htmlspecialchars(SimpleSAML\Module::getModuleURL('themeopenaire/resources/js/theme.js')) ?>"
+>
+</script>
 
 </body>
+
 </html>
