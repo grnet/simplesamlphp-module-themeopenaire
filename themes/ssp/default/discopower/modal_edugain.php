@@ -20,7 +20,7 @@
             </span>
           </div> <!-- /input-group -->
           <div class="metalist ssp-content-group__provider-list ssp-content-group__provider-list--edugain js-spread"
-                id="list_<?= $this->data['$tab'] ?>">
+                id="list_<?= $this->data['tab'] ?>">
           <?php
             if (!empty($this->data['preferredidp'])
                 && array_key_exists($this->data['preferredidp'], $this->data['slist'])) {
