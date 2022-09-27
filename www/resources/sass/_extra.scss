@@ -65,9 +65,6 @@ body {
 }
 
 a {
-  border: 1px solid transparent;
-  @extend .font-smooth;
-
   &:hover, &:active, &:focus {
     color: $link-color-hover;
     text-decoration: none;
@@ -764,5 +761,11 @@ input.form-control[type="radio"], input.form-control[type="checkbox"] {
     .disco {
       margin-top: unset;
     }
+  }
+}
+
+@media (min-width: 1400px) {
+  .container {
+    width: 1400px;
   }
 }

@@ -144,6 +144,9 @@ $this->data['htmlinject']['htmlContentPost'][] = '<script type="text/javascript"
                 }
                 ?>
               </div>
+              <div class="col-sm-12 text-center">
+                <a class="no-account" href="https://services.openaire.eu/uoa-user-management/register.jsp"><?= $this->t('{themeopenaire:discopower:no_account}') ?></a>
+              </div>
             </div>
           <?php
           endif; ?>

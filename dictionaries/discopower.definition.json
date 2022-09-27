@@ -52,5 +52,8 @@
   },
   "sign_up": {
     "en": "Need an account?"
+  },
+  "no_account": {
+    "en": "Don't have an account?"
   }
 }
