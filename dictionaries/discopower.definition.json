@@ -55,5 +55,8 @@
   },
   "no_account": {
     "en": "Don't have an account?"
+  },
+  "connect_with": {
+    "en": "with your institutional account"
   }
 }

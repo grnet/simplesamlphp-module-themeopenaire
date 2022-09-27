@@ -122,7 +122,6 @@ h1 {
 
   &.disco {
     color: black;
-    //margin-top: 3em;
   }
 }
 
@@ -152,7 +151,7 @@ h3 {
     @extend .font-smooth;
     font-family: $aileron;
     color: $light-gray;
-    margin: 1.5em 0 3em 0;
+    margin: 2em;
   }
 }
 
@@ -360,8 +359,8 @@ $btn-img-copy-height: 20px;
 // Content
 
 .ssp-content-group {
-  margin-bottom: 18px;
-  margin-top: 18px;
+  margin-bottom: 2em;
+  margin-top: 2em;
 
   &__provider-list {
     overflow: auto;
@@ -434,11 +433,10 @@ $btn-img-copy-height: 20px;
   @extend .font-smooth;
   font-size: 16px;
   color: $light-gray;
-  margin: 4em 0 3em 0;
+  margin: 3em 0 3em 0;
 }
 
 body .ssp-modal-body {
-  padding: 30px;
   display: flex;
   flex-flow: column;
   align-items: center;
@@ -537,6 +535,10 @@ input.form-control[type="radio"], input.form-control[type="checkbox"] {
 .modal {
   position: relative;
 
+  .ssp-btn {
+    margin-bottom: 0;
+  }
+
   &:focus {
     box-shadow: unset !important;
     outline: 0 none !important;
@@ -547,6 +549,17 @@ input.form-control[type="radio"], input.form-control[type="checkbox"] {
     color: black;
     font-size: 41px;
     font-family: Aileron;
+    text-align: center;
+    margin: unset;
+  }
+
+  &-header {
+    display: flex;
+    justify-content: space-between;
+    flex-flow: row-reverse;
+    align-items: baseline;
+    margin-bottom: 3em;
+    border: none;
   }
 
   &.fade {
@@ -566,6 +579,10 @@ input.form-control[type="radio"], input.form-control[type="checkbox"] {
     }
   }
 
+  &-body {
+    padding: 0;
+  }
+
   &-backdrop.in {
     opacity: 0;
   }
@@ -577,8 +594,18 @@ input.form-control[type="radio"], input.form-control[type="checkbox"] {
   }
 }
 
-.close {
-  font-size: 4em;
+button.close {
+  font-size: 7em;
+  font-weight: normal;
+  text-shadow: unset;
+  opacity: 1;
+  color: #333;
+
+  &:focus {
+    box-shadow: unset !important;
+    outline: 0 none !important;
+    border-color: transparent !important;
+  }
 }
 
 .hidden {
@@ -595,7 +622,7 @@ input.form-control[type="radio"], input.form-control[type="checkbox"] {
 
 .input-group {
   width: 80%;
-  margin: auto;
+  margin: auto auto 2.5em;
 
   &-addon {
     background-color: white;
@@ -679,7 +706,7 @@ input.form-control[type="radio"], input.form-control[type="checkbox"] {
   bottom: 0;
   right: 0;
   left: 0;
-  z-index: 1000;
+  z-index: 1100;
   display: flex;
   border: 1px solid #90929D;
   padding: 20px;
@@ -737,13 +764,8 @@ input.form-control[type="radio"], input.form-control[type="checkbox"] {
 }
 
 @media screen and (max-width: 767px) {
-  .ssp-modal-body {
-    padding-left: 0;
-    padding-right: 0;
-  }
-
   .choose-idp {
-    margin-top: -60%;
+    margin-top: -80%;
     border-top-left-radius: 40px;
     border-top-right-radius: 40px;
     background-color: #F9F9F9;

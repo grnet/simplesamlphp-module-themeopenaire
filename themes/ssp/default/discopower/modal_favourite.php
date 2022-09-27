@@ -13,10 +13,10 @@ if(empty($favEntry)) {
 <div class="modal fade" id="favourite-modal" tabindex="-1" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">
-      <!-- <div class="modal-header"> -->
-      <!--   <button type="button" class="js-close-custom close"><span aria-hidden="true">&times;</span></button> -->
-      <!--   <h2 class="modal-title">Login</h2> -->
-      <!-- </div> -->
+       <div class="modal-header">
+         <button type="button" class="js-close-custom close"><span aria-hidden="true">&times;</span></button>
+         <h2 class="modal-title"><?= $this->t('{themeopenaire:discopower:header}') ?></h2>
+       </div>
       <div class="modal-body ssp-modal-body">
         <div class="row text-center">
           <form id="idpselectform" method="get" action="<?=$this->data['urlpattern'] ?>" class="ssp-form-favourite">
@@ -29,10 +29,10 @@ if(empty($favEntry)) {
                    value="<?= htmlspecialchars(getTranslatedName($this, $favEntry)) ?>"/>
           </form>
         </div>
-        <div class="row text-center ssp-or">or with</div>
+        <div class="row text-center ssp-or"><?= $this->t('{themeopenaire:discopower_tabs:or_with}') ?></div>
         <div class="row text-center">
           <button class="ssp-btn btn ssp-btn__btn-lg ssp-btn__lg text-uppercase remember-me js-close-custom">
-            Choose another account
+            <?= $this->t('{themeopenaire:discopower_tabs:change_account}') ?>
           </button>
         </div>
       </div> <!-- /modal-body -->

@@ -3,7 +3,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="js-close-custom close"><span aria-hidden="true">&times;</span></button>
-        <h2 class="modal-title"><?= $this->t('{discopower:tabs:' . $this->data['tab'] . '}') ?></h2>
+        <h2 class="modal-title"><?= $this->t('{themeopenaire:discopower_tabs:' . $this->data['tab'] . '}') ?></h2>
       </div>
       <div class="modal-body ssp-modal-body">
         <div class="row">
@@ -46,12 +46,12 @@
 </div> <!-- /modal -->'
 <div class="row ssp-content-group">
   <div class="col-sm-12 text-center">
-    <h3 class="disco">connect with</h3>
+    <h3 class="disco"><?= $this->t('{themeopenaire:discopower:connect_with}') ?></h3>
     <button type="button" class="ssp-btn btn ssp-btn__btn-lg ssp-btn__lg text-uppercase" data-toggle="modal"
             data-target="#edugain-modal">
       <img class="round"
            src="<?= SimpleSAML\Module::getModuleURL('themeopenaire/resources/images/edugain.png') ?>">
-      edugain
+      <?= $this->t('{themeopenaire:discopower_tabs:' . $this->data['tab'] . '}') ?>
     </button>
   </div>
 </div>
