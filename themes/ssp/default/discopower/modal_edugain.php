@@ -38,9 +38,9 @@
           </div> <!-- /metalist -->
         </div> <!-- /row -->
       </div> <!-- /modal-body -->
-<!--      <div class="modal-footer ssp-text-left">-->
-<!--        --><?php //print $this->includeAtTemplateBase('discopower/lang_picker.php'); ?>
-<!--      </div>-->
+      <div class="modal-footer ssp-text-left">
+        <?php print $this->includeAtTemplateBase('discopower/lang_picker.php'); ?>
+      </div>
     </div> <!-- /modal-content -->
   </div> <!-- /modal-dialog -->
 </div> <!-- /modal -->'

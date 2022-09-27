@@ -80,7 +80,7 @@ foreach ($languages as $lang => $current) {
       <span class="caret"></span>
     </button>
     <ul class="dropdown-menu dropdown-menu-left ssp-dropdown__two_cols" aria-labelledby="dropDownMenuLanguages">
-      <?= $languages_html_list; ?>
+      <?= $languages_html_list ?>
     </ul>
   </div>
 </div>

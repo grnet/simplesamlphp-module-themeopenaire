@@ -30,7 +30,7 @@
     "en": "Sign in with"
   },
   "header": {
-    "en": "Single Sign On"
+    "en": "Sign in to OpenAIRE"
   },
   "subheader": {
     "en": "Use the same credentials for all our services"
@@ -49,6 +49,8 @@
   },
   "cookies_accept_btn_text": {
     "en": "OK"
+  },
+  "sign_up": {
+    "en": "Need an account?"
   }
 }
-

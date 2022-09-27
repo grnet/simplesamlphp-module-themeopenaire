@@ -33,6 +33,11 @@ if (!empty($loader)) {
   $this->includeAtTemplateBase('includes/' . $loader . '.php');
 }
 
+$languageBar = $themeConfig->getValue('hideLanguageBar');
+if (!empty($languageBar)) {
+  $this->data['hideLanguageBar'] = true;
+}
+
 $this->data['header'] = $this->t('selectidp');
 $this->data['jquery'] = ['core' => true, 'ui' => false, 'css' => false];
 
