@@ -535,6 +535,15 @@ input.form-control[type="radio"], input.form-control[type="checkbox"] {
 .modal {
   position: relative;
 
+  &#favourite-modal {
+    height: 90vh;
+
+    .modal-body.ssp-modal-body {
+      justify-content: center;
+      height: 50%;
+    }
+  }
+
   .ssp-btn {
     margin-bottom: 0;
   }
@@ -556,10 +565,22 @@ input.form-control[type="radio"], input.form-control[type="checkbox"] {
   &-header {
     display: flex;
     justify-content: space-between;
-    flex-flow: row-reverse;
+    flex-flow: column;
     align-items: baseline;
     margin-bottom: 3em;
     border: none;
+
+    h2 {
+      width: 100%;
+    }
+
+    .modal-button {
+      width: 100%;
+
+      button {
+        float: right;
+      }
+    }
   }
 
   &.fade {
@@ -765,7 +786,7 @@ button.close {
 
 @media screen and (max-width: 767px) {
   .choose-idp {
-    margin-top: -80%;
+    margin-top: -90%;
     border-top-left-radius: 40px;
     border-top-right-radius: 40px;
     background-color: #F9F9F9;
