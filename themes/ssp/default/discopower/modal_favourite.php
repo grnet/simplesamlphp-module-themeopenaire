@@ -13,10 +13,12 @@ if(empty($favEntry)) {
 <div class="modal fade" id="favourite-modal" tabindex="-1" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">
-       <div class="modal-header">
-         <button type="button" class="js-close-custom close"><span aria-hidden="true">&times;</span></button>
-         <h2 class="modal-title"><?= $this->t('{themeopenaire:discopower:header}') ?></h2>
-       </div>
+      <div class="modal-header">
+         <span class="modal-button">
+          <button type="button" class="js-close-custom close"><span aria-hidden="true">&times;</span></button>
+         </span>
+        <h2 class="modal-title"><?= $this->t('{themeopenaire:discopower:header}') ?></h2>
+      </div>
       <div class="modal-body ssp-modal-body">
         <div class="row text-center">
           <form id="idpselectform" method="get" action="<?=$this->data['urlpattern'] ?>" class="ssp-form-favourite">

@@ -2,7 +2,9 @@
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="js-close-custom close"><span aria-hidden="true">&times;</span></button>
+        <span class="modal-button">
+          <button type="button" class="js-close-custom close"><span aria-hidden="true">&times;</span></button>
+        </span>
         <h2 class="modal-title"><?= $this->t('{themeopenaire:discopower_tabs:' . $this->data['tab'] . '}') ?></h2>
       </div>
       <div class="modal-body ssp-modal-body">
@@ -20,8 +22,8 @@
             </span>
           </div> <!-- /input-group -->
           <div class="metalist ssp-content-group__provider-list ssp-content-group__provider-list--edugain js-spread"
-                id="list_<?= $this->data['tab'] ?>">
-          <?php
+               id="list_<?= $this->data['tab'] ?>">
+            <?php
             if (!empty($this->data['preferredidp'])
                 && array_key_exists($this->data['preferredidp'], $this->data['slist'])) {
               $this->data['metadata'] = $this->data['slist'][$this->data['preferredidp']];
@@ -34,7 +36,7 @@
                 $this->includeAtTemplateBase('discopower/show_entry.php');
               }
             }
-          ?>
+            ?>
           </div> <!-- /metalist -->
         </div> <!-- /row -->
       </div> <!-- /modal-body -->

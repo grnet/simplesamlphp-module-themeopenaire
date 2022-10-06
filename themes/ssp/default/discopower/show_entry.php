@@ -16,6 +16,7 @@ $providersOnlyIconName = array_keys($providersOnlyIcon);
 $namelower_dasherize   = str_replace(' ', '_', strtolower(getTranslatedName($this, $this->data['metadata'])));
 
 $href = $basequerystring . urlencode($this->data['metadata']['entityid']);
+$extra_classes = "";
 if (in_array($namelower_dasherize, $providersOnlyIconName)) {
   $extra_classes = "ssp-btn--round-icon  " . $namelower_dasherize;
   $iconUrl       = $namelower_dasherize . '.' . $providersOnlyIcon[$namelower_dasherize];

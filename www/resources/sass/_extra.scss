@@ -535,13 +535,9 @@ input.form-control[type="radio"], input.form-control[type="checkbox"] {
 .modal {
   position: relative;
 
-  &#favourite-modal {
-    height: 90vh;
-
-    .modal-body.ssp-modal-body {
-      justify-content: center;
-      height: 50%;
-    }
+  .modal-dialog {
+    width: 100%;
+    margin-top: 0;
   }
 
   .ssp-btn {
@@ -567,7 +563,7 @@ input.form-control[type="radio"], input.form-control[type="checkbox"] {
     justify-content: space-between;
     flex-flow: column;
     align-items: baseline;
-    margin-bottom: 3em;
+    //margin-bottom: 3em;
     border: none;
 
     h2 {
@@ -612,6 +608,19 @@ input.form-control[type="radio"], input.form-control[type="checkbox"] {
     background-color: transparent;
     border: unset;
     box-shadow: unset;
+  }
+
+  &#favourite-modal {
+    height: 90vh;
+
+    .modal-title {
+      margin-top: 2em;
+    }
+
+    .modal-body.ssp-modal-body {
+      justify-content: center;
+      height: 50%;
+    }
   }
 }
 
@@ -680,6 +689,7 @@ button.close {
 .ssp-container-small {
   //max-width: 280px;
   margin: 0 auto;
+  width: 100%;
 }
 
 .ssp-signup {
