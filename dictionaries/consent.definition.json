@@ -28,5 +28,11 @@
   },
   "consent_accept": {
     "en": "We will be using the information below"
+  },
+  "remember": {
+    "en": "Don't ask me again"
+  },
+  "no" : {
+    "en": "CANCEL"
   }
 }

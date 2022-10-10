@@ -13,7 +13,15 @@ $summary   = 'summary="' . $translator->t('{consent:consent:table_summary}') . '
     <?php foreach ($this->data['attributes'] as $name => $value): ?>
     <tr>
       <td>
-        <div class="attrname ssp-table--attrname"><?= htmlspecialchars($name) ?></div>
+        <div class="attrname ssp-table--attrname">
+          <?php
+          if($name == 'eduPersonScopedAffiliation') {
+            print htmlspecialchars($this->t('{themeopenaire:consent:affiliation_input_label}')) . ":";
+          } else {
+              print $translator->getAttributeTranslation(htmlspecialchars($name)) . ":"; // translate
+          }
+          ?>
+        </div>
       <?php
       $nameRaw = $name;
       $name    = $translator->getAttributeTranslation($nameRaw);

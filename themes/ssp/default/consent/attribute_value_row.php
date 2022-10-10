@@ -17,20 +17,14 @@ if ($isHidden) {
 
 ?>
 
-<div class="attrname ssp-table--attrname">
-  <div class="attrvalue ssp-table--attrvalue<?= $enable_hide ?>">
-    <ul class="list-unstyled ssp-table--attrvalue--list">
-      <?php foreach ($attributeValueList as $value): ?>
-        <li class="ssp-table--attrvalue--list--item">
-          <?php if ($nameRaw === 'jpegPhoto'): ?>
-            <img src="data:image/jpeg;base64,<?=htmlspecialchars($value) ?>" alt="User photo" />
-          <?php else: ?>
-            <?= htmlspecialchars($value) ?>
-          <?php endif; ?>
-        </li>
-      <?php endforeach; ?>
-    </ul>
-  </div>
+<div class='attrvalue ssp-table--attrvalue'<?= $enable_hide ?>'>
+  <?php foreach ($attributeValueList as $value): ?>
+    <?php if ($nameRaw === 'jpegPhoto'): ?>
+      <span class="attrvalue-list"><img src="data:image/jpeg;base64,<?=htmlspecialchars($value) ?>" alt="User photo" />,</span>
+    <?php else: ?>
+      <span class="attrvalue-list"><?= htmlspecialchars($value) ?></span>
+    <?php endif; ?>
+  <?php endforeach; ?>
 </div>
 <?php if($isHidden): ?>
   <div class="attrvalue consent_showattribute" id="visible_<?= $hiddenId ?>">

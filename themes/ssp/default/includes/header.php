@@ -46,6 +46,13 @@ if (array_key_exists('pageid', $this->data)) {
  */
 header('X-Frame-Options: SAMEORIGIN');
 
+$action = '';
+if(!empty($this->data['yesTarget'])) {
+  $action_url = pathinfo($this->data['yesTarget'], PATHINFO_FILENAME);
+  $action_url_array = explode('/', $action_url);
+  $action = end($action_url_array);
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en-US">
@@ -149,7 +156,7 @@ if ($onLoad !== '') {
     $onLoad = ' onload="' . $onLoad . '"';
 }
 ?>
-<body<?= $onLoad ?>>
+<body class="<?= $action ?>" <?= $onLoad ?>>
 
     <div class="header">
         <!--   Ribbon Text     -->
@@ -170,7 +177,7 @@ if ($onLoad !== '') {
         <?php endif; ?>
 
         <div class="text-center">
-            <a
+            <a class="header-title"
                 <?=
                 strpos($this->t('{themeopenaire:default:logo_link_url}'), 'not translated') === false
                 ? 'href="' .  $this->t('{themeopenaire:default:logo_link_url}') . '"'
@@ -183,10 +190,10 @@ if ($onLoad !== '') {
                 ?>
             >
               <?php
-                $render_header_logo = $themeConfig->getValue('header_logo') ?? true;
+                $render_header_logo = $this->data['header_logo'] ?? $themeConfig->getValue('header_logo') ?? true;
                 if($render_header_logo) {
               ?>
-                <img
+                <img class="header-logo-img"
                     src="<?= SimpleSAML\Module::getModuleURL('themeopenaire/resources/images/logo.jpg') ?>"
                     alt="simplesamlphp"
                 />

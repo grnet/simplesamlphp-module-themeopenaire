@@ -37,6 +37,7 @@ if (array_key_exists('consent:hiddenAttributes', $state)) {
 //$attributes = $this->data['attributes'];
 //var_dump($attributes);
 
+$this->data['header_logo'] = true;
 $this->data['header'] = $this->t('{consent:consent:consent_header}');
 $this->data['jquery'] = ['core' => true];
 
@@ -49,6 +50,11 @@ $this->includeAtTemplateBase('includes/header.php');
       <?php $this->includeAtTemplateBase('consent/attributes_table.php') ?>
       <?php if (isset($this->data['consent_purpose'])): ?>
         <p><?= $this->data['consent_purpose'] ?></p>
+      <?php endif; ?>
+      <?php if ($this->data['sppp'] !== false) : ?>
+        <p class="service-privacy-policy"><?= htmlspecialchars($this->t('{consent:consent:consent_privacypolicy}')) ?>
+          <a target="_blank" href="<?= htmlspecialchars($this->data['sppp']) ?>"><?= $dstName ?></a>
+        </p>
       <?php endif; ?>
       <div class="ssp-btns-container">
         <form
@@ -63,7 +69,7 @@ $this->includeAtTemplateBase('includes/header.php');
             } // Embed hidden fields...
             ?>
             <input type="checkbox" name="saveconsent" <?= $checked ?> value="1"/> <?= $this->t(
-              '{consent:consent:remember}'
+              '{themeopenaire:consent:remember}'
             ) ?>
             <input type="hidden" name="StateId" value="<?= htmlspecialchars($this->data['stateId']) ?>"/>
           </p>
@@ -89,7 +95,7 @@ $this->includeAtTemplateBase('includes/header.php');
             name="no"
             id="nobutton"
           >
-            <?= htmlspecialchars($this->t('{consent:consent:no}')) ?>
+            <?= htmlspecialchars($this->t('{themeopenaire:consent:no}')) ?>
           </button>
         </form>
       </div> <!-- /ssp-btns-container -->
@@ -97,11 +103,5 @@ $this->includeAtTemplateBase('includes/header.php');
   </div> <!-- /row -->
 
 <?php
-if ($this->data['sppp'] !== false) : ?>
-  <p><?= htmlspecialchars($this->t('{consent:consent:consent_privacypolicy}')) ?>
-    <a target="_blank" href="<?= htmlspecialchars($this->data['sppp']) ?>"><?= $dstName ?></a>
-  </p>
-<?php
-endif;
 
 $this->includeAtTemplateBase('includes/footer.php');
