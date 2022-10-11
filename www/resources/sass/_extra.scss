@@ -897,6 +897,12 @@ button.close {
 }
 
 @media screen and (max-width: 767px) {
+  .getconsent {
+    .ssp-container {
+      margin: 0 auto;
+    }
+  }
+
   .choose-idp {
     margin-top: -90%;
     border-top-left-radius: 40px;
@@ -915,6 +921,15 @@ button.close {
     .ssp-logo,
     .disco {
       margin-top: unset;
+    }
+  }
+}
+
+
+@media screen and (max-width: 1400px) {
+  .getconsent {
+    .container {
+      width: 80%;
     }
   }
 }
