@@ -47,8 +47,8 @@ if (array_key_exists('pageid', $this->data)) {
 header('X-Frame-Options: SAMEORIGIN');
 
 $action = '';
-if(!empty($this->data['yesTarget'])) {
-  $action_url = pathinfo($this->data['yesTarget'], PATHINFO_FILENAME);
+if(!empty($_SERVER['PATH_TRANSLATED'])) {
+  $action_url = pathinfo($_SERVER['PATH_TRANSLATED'], PATHINFO_FILENAME);
   $action_url_array = explode('/', $action_url);
   $action = end($action_url_array);
 }

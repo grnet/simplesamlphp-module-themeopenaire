@@ -107,7 +107,7 @@ $(document).ready(function() {
 
   $('[data-toggle="tooltip"]').tooltip();
 
-  resizeAll();
+  // resizeAll();
   // loader for discopower view
   $('.loader-container').delay(300).fadeOut('slow', function() {
     $('.loader-container').siblings().not($('#cookies')).show();
@@ -197,10 +197,12 @@ $(document).ready(function() {
     $('.row.ssp-content-group').addClass('hidden')
     $('#query_edugain').trigger('focus')
     $('#query_edugain').liveUpdate('#list_edugain');
+    $('h1.disco').hide();
   });
 
   $('#edugain-modal, #favourite-modal').on('hidden.bs.modal', function(e) {
     $('.row.ssp-content-group').removeClass('hidden')
+    $('h1.disco').show();
   });
 
   $('.js-pick-language').click(function(e) {

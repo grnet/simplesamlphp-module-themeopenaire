@@ -38,7 +38,9 @@ if (!empty($languageBar)) {
   $this->data['hideLanguageBar'] = true;
 }
 
-$this->data['header'] = $this->t('selectidp');
+if (!array_key_exists('header', $this->data)) {
+  $this->data['header'] = 'selectidp';
+}
 $this->data['jquery'] = ['core' => true, 'ui' => false, 'css' => false];
 
 $this->data['head'] = '<link rel="stylesheet" media="screen" type="text/css" href="'
