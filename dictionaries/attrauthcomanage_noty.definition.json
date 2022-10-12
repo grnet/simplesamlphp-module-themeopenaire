@@ -45,10 +45,10 @@
     "en": "<div class=\"invite-expire\">Email confirmation token EXPIRES in <b>&nbsp;%DATE%</b></div>"
   },
   "petition_user_notify": {
-    "en": "<p class=\"petition-user-notify\">We have sent an email with a confirmation link to your email address <cite><b>%MAIL%</b></cite>. In order to complete the sign-up process, please click the confirmation link. If you do not find the email in your Inbox, please check your Spam or Junk folder for an email from \"OpenAIRE AAI Notifications\". If you do find the email in these folders, mark the email as \"safe\" or \"not spam\" to ensure that you receive any future notifications about your OpenAIRE AAI ID.</p><p>You can also click the <strong>\"Resend Verification Email\"</strong> button below to have another email sent to you."
+    "en": "<span class=\"petition-user-notify\">An email has been sent to  <cite><b>%MAIL%</b></cite> with a link to verify your account.<br>If you have not received the email please check your spam folder."
   },
   "resend_confirmation_email": {
-    "en": "Please verify your email address by clicking the link in the email we sent you"
+    "en": "<span class=\"main-title\">Please verify your email address</span><span class=\"sub-title\">You will need to verify your email to complete registration.</span>"
   },
   "user_suspended": {
     "en": "Your identity (%ORGID%) has been suspended. Please contact our <a href=\"mailto:aai-support@openaire.eu\">support</a> and make sure to include the error message above"
@@ -57,6 +57,6 @@
     "en": "Identity suspended"
   },
   "yes": {
-    "en": "Resend Verification Email"
+    "en": "Resend Email"
   }
 }

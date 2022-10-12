@@ -51,6 +51,7 @@ if(!empty($_SERVER['PATH_TRANSLATED'])) {
   $action_url = pathinfo($_SERVER['PATH_TRANSLATED'], PATHINFO_FILENAME);
   $action_url_array = explode('/', $action_url);
   $action = end($action_url_array);
+  $action = str_replace('.', '_', $action);
 }
 
 ?>

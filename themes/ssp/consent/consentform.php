@@ -34,9 +34,6 @@ if (array_key_exists('consent:hiddenAttributes', $state)) {
   $this->data['hiddenAttributes'] = $state['consent:hiddenAttributes'];
 }
 
-//$attributes = $this->data['attributes'];
-//var_dump($attributes);
-
 $this->data['header_logo'] = true;
 $this->data['header'] = $this->t('{consent:consent:consent_header}');
 $this->data['jquery'] = ['core' => true];
