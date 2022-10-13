@@ -362,9 +362,25 @@ $btn-img-copy-height: 20px;
   min-width: max-content;
 }
 
-input[type=checkbox] {
+input[type="checkbox"] {
+  display: inline-block;
+  height: 16px;
+  width: 16px;
+  overflow: hidden;
+  margin-top: -2px;
+  vertical-align: middle;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-color: #fff;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  border-radius: 4px;
+  border: 1px solid #eaeaea;
   &:checked {
-    filter: hue-rotate(210deg);
+    background-image: url(data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2214%22%20height%3D%2211%22%20viewBox%3D%220%200%2014%2011%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%20%20%20%20%3Cpolygon%20fill%3D%22%23FFFFFF%22%20points%3D%2212%201%205%207.5%202%205%201%205.5%205%2010%2013%201.5%22%20%2F%3E%0A%3C%2Fsvg%3E%0A)!important;
+    background-color: #3086ed;
+    background-size: contain;
+    filter: none;
   }
 }
 
@@ -991,8 +1007,80 @@ button.close {
   }
 }
 
+.aup_in_form {
+
+  .modal {
+    position: fixed;
+  }
+
+  .modal-header h2 {
+    margin-top: 20px;
+  }
+
+  .modal-content {
+    -webkit-box-shadow: 0 5px 15px rgb(0 0 0 / 50%);
+    box-shadow: 0 5px 15px rgb(0 0 0 / 50%);
+    background-color: #fff;
+  }
+
+  .modal-dialog {
+    width: 600px;
+    margin: 30px auto;
+  }
+
+  .modal-header {
+    border-bottom: 1px solid #e5e5e5;
+  }
+
+  .container:before{
+    content: " ";
+    background: url(/proxy/module.php/themeopenaire/resources/images/logo.jpg) no-repeat;
+    content: '';
+    height: 8em;
+    width: 14em;
+    display: block;
+    background-size: contain;
+    margin: auto;
+    margin-top: 3em;
+    margin-bottom: 3em;
+  }
+
+  h1.text-center {
+    text-transform: uppercase!important;
+  }
+
+  .ssp-btn.btn.ssp-btn__action.ssp-btns-container--btn__left.text-uppercase {
+    margin: auto;
+    background: rgba(0,0,0,0) linear-gradient(256deg, #3086ED 0%, #211F7E 100%) 0% 0% no-repeat padding-box;
+    border-radius: 60px;
+    text-align: center;
+    font: normal normal bold 14px/19px Aileron;
+    letter-spacing: 0px;
+    color: #fff;
+    text-transform: uppercase;
+    opacity: 1;
+    min-width: fit-content;
+    padding: 0 1em;
+  }
+
+  .ssp-btn.btn.ssp-btn__action.ssp-btns-container--btn__left.text-uppercase[disabled="disabled"] {
+    background: #ccc;
+  }
+
+  h3 {
+    margin-top:10px;
+  }
+
+}
 
 @media screen and (max-width: 600px) {
+  .aup_in_form {
+    .modal-dialog {
+      width: 600px;
+      margin: 30px auto;
+    }
+  }
+
   #cookies-wrapper {
     flex-direction: column;
 
@@ -1040,7 +1128,7 @@ button.close {
 
 
 @media screen and (max-width: 1400px) {
-  .getconsent {
+  .getconsent, .aup_in_form {
     .container {
       width: 80%;
     }
@@ -1053,7 +1141,8 @@ button.close {
   }
 
   .noty_ctrl,
-  .getconsent {
+  .getconsent,
+  .aup_in_form {
     .container {
       width: 50% !important;
     }
