@@ -18,19 +18,19 @@
     "en": "Identity Expired"
   },
   "org_identity_expired_description": {
-    "en": "Your identity (%ORGID%) has expired. Please contact <a href=\"mailto:aai-support@openaire.eu\">our support</a> and make sure to include the error message above."
+    "en": "Your identity (%ORGID%) has expired. Please contact <a href=\"mailto:aai@openaire.eu\">our support</a> and make sure to include the error message above."
   },
   "org_identity_nologin_banner": {
     "en": "Identity not enabled for login"
   },
   "org_identity_nologin_description": {
-    "en": "Your identity (%ORGID%) cannot be used for login. Please contact <a href=\"mailto:aai-support@openaire.eu\">our support</a> and make sure to include the error message above."
+    "en": "Your identity (%ORGID%) cannot be used for login. Please contact <a href=\"mailto:aai@openaire.eu\">our support</a> and make sure to include the error message above."
   },
   "org_identity_removed_banner": {
     "en": "Identity not valid for login"
   },
   "org_identity_removed_description": {
-    "en": "Your identity (%ORGID%) has been removed. Please contact <a href=\"mailto:aai-support@openaire.eu\">our support</a> and make sure to include the error message above."
+    "en": "Your identity (%ORGID%) has been removed. Please contact <a href=\"mailto:aai@openaire.eu\">our support</a> and make sure to include the error message above."
   },
   "petition_info": {
     "en": "The identifier <cite><b>%ORGIDENT%</b></cite> is in Email Pending Confirmation Status.&nbsp;Please check your Mail <cite><b>%MAIL%</b></cite> Inbox or Spam for further information.&nbsp;"
@@ -51,7 +51,7 @@
     "en": "<span class=\"main-title\">Please verify your email address</span><span class=\"sub-title\">You will need to verify your email to complete registration.</span>"
   },
   "user_suspended": {
-    "en": "Your identity (%ORGID%) has been suspended. Please contact our <a href=\"mailto:aai-support@openaire.eu\">support</a> and make sure to include the error message above"
+    "en": "Your identity (%ORGID%) has been suspended. Please contact our <a href=\"mailto:aai@openaire.eu\">support</a> and make sure to include the error message above"
   },
   "user_suspended_title": {
     "en": "Identity suspended"
