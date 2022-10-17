@@ -21,7 +21,7 @@
 		"en": "Switzerland"
 	},
 	"edugain": {
-		"en": "Use your eduGAIN account"
+		"en": "Sign in with EduGAIN"
 	},
 	"misc": {
 		"en": "Miscellaneous"
@@ -38,10 +38,16 @@
 	"social": {
 		"en": "Social Networks"
 	},
-  "idps_with_logos": {
-    "en": "Use your account in social and other networks"
-  },
-  "local": {
-    "en": "Use your OpenAIRE account"
-  }
+	"idps_with_logos": {
+		"en": "Use your account in social and other networks"
+	},
+	"local": {
+		"en": "Use your OpenAIRE account"
+	},
+	"or_with":  {
+		"en": "or with"
+	},
+	"change_account": {
+		"en": "Choose another account"
+	}
 }

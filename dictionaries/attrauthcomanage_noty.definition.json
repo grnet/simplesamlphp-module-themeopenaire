@@ -1,0 +1,62 @@
+{
+  "account_pending_confirmation": {
+    "en": "Account in Pending Email Confirmation Status"
+  },
+  "default_status": {
+    "en": "Action Required"
+  },
+  "invitation_restored": {
+    "en": "Invitation has been restored."
+  },
+  "msg_title": {
+    "en": "<b>This is your current status:</b>"
+  },
+  "no": {
+    "en": "Abort Login"
+  },
+  "org_identity_expired_banner": {
+    "en": "Identity Expired"
+  },
+  "org_identity_expired_description": {
+    "en": "Your identity (%ORGID%) has expired. Please contact <a href=\"mailto:aai@openaire.eu\">our support</a> and make sure to include the error message above."
+  },
+  "org_identity_nologin_banner": {
+    "en": "Identity not enabled for login"
+  },
+  "org_identity_nologin_description": {
+    "en": "Your identity (%ORGID%) cannot be used for login. Please contact <a href=\"mailto:aai@openaire.eu\">our support</a> and make sure to include the error message above."
+  },
+  "org_identity_removed_banner": {
+    "en": "Identity not valid for login"
+  },
+  "org_identity_removed_description": {
+    "en": "Your identity (%ORGID%) has been removed. Please contact <a href=\"mailto:aai@openaire.eu\">our support</a> and make sure to include the error message above."
+  },
+  "petition_info": {
+    "en": "The identifier <cite><b>%ORGIDENT%</b></cite> is in Email Pending Confirmation Status.&nbsp;Please check your Mail <cite><b>%MAIL%</b></cite> Inbox or Spam for further information.&nbsp;"
+  },
+  "petition_invalidate_msg": {
+    "en": "<p><i class=\"fa fa-exclamation-triangle\" aria-hidden=\"true\"></i>This action will invalidate any previous confirmation links.</p>"
+  },
+  "petition_token_expired": {
+    "en": "<div class=\"invite-expire\">Email confirmation token EXPIRED <b>&nbsp;%DATE%</b>&nbsp;ago</div>"
+  },
+  "petition_token_expires": {
+    "en": "<div class=\"invite-expire\">Email confirmation token EXPIRES in <b>&nbsp;%DATE%</b></div>"
+  },
+  "petition_user_notify": {
+    "en": "<span class=\"petition-user-notify\">An email has been sent to  <cite><b>%MAIL%</b></cite> with a link to verify your account.<br>If you have not received the email please check your spam folder."
+  },
+  "resend_confirmation_email": {
+    "en": "<span class=\"main-title\">Please verify your email address</span><span class=\"sub-title\">You will need to verify your email to complete registration.</span>"
+  },
+  "user_suspended": {
+    "en": "Your identity (%ORGID%) has been suspended. Please contact our <a href=\"mailto:aai@openaire.eu\">support</a> and make sure to include the error message above"
+  },
+  "user_suspended_title": {
+    "en": "Identity suspended"
+  },
+  "yes": {
+    "en": "Resend Email"
+  }
+}

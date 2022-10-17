@@ -32,3 +32,6 @@ Temporary Items
 **/css
 **/.sass-cache
 **/*.un~
+
+.idea/*
+.idea

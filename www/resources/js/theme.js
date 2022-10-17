@@ -86,10 +86,19 @@ function deleteCookie(cname) {
   document.cookie = cname + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;path=/';
 };
 
+// Hide Top Bar notification
+function closeNoty(element) {
+  $(element).parent().hide()
+}
+
 $(document).ready(function() {
-  if (!getCookie('cookies_accepted')) {
+  if (!Cookies.get('cookies_accepted')) {
     $('#cookies').show();
-  }
+  };
+
+  $('#dropDownMenuLanguages').click(function() {
+    $('.dropdown-menu').toggle();
+  });
 
   var has_form = $('input.form-control').length > 0;
   if (!has_form) {
@@ -98,16 +107,21 @@ $(document).ready(function() {
 
   $('[data-toggle="tooltip"]').tooltip();
 
-  resizeAll();
+  // resizeAll();
   // loader for discopower view
-  $('#loader').delay(300).fadeOut('slow', function() {
-    $('#loader').siblings().not($('#cookies')).show();
+  $('.loader-container').delay(300).fadeOut('slow', function() {
+    $('.loader-container').siblings().not($('#cookies')).show();
     var setLang = getCookie('setLang');
+    console.log('setlang:', setLang)
     if (setLang) {
-      $('#edugain-modal').modal('show');
+      $('#edugain-modal').modal({
+        focus: false
+      }).modal('show');
       deleteCookie('setLang');
     } else {
-      $('#favourite-modal').modal('show');
+      $('#favourite-modal').modal({
+        focus: false
+      }).modal('show');
     }
   });
 
@@ -123,7 +137,7 @@ $(document).ready(function() {
     resizeAll();
   });
 
-  $('button[name="yes"]').click(function(e){
+    $('button[name="yes"]').click(function(e){
     var inputs = $('input.form-control');
     // Check if mandatory input field is empty
     inputs.each(function(key, input) {
@@ -160,9 +174,9 @@ $(document).ready(function() {
         data['mail'] = mailRadio.val();
       }
       $('input[name="userData"]').val(JSON.stringify(data));
-      $('#loader').show();
+      $('.loader-container').show();
 
-      $('#loader').siblings().hide();
+      $('.loader-container').siblings().hide();
     }
 
   })
@@ -179,8 +193,16 @@ $(document).ready(function() {
       handleTerms($(this));
   })
 
-  $('#edugain-modal').on('shown.bs.modal', function(e) {
+  $('#edugain-modal, #favourite-modal').on('shown.bs.modal', function(e) {
+    $('.row.ssp-content-group').addClass('hidden')
+    $('#query_edugain').trigger('focus')
     $('#query_edugain').liveUpdate('#list_edugain');
+    $('h1.disco').hide();
+  });
+
+  $('#edugain-modal, #favourite-modal').on('hidden.bs.modal', function(e) {
+    $('.row.ssp-content-group').removeClass('hidden')
+    $('h1.disco').show();
   });
 
   $('.js-pick-language').click(function(e) {
@@ -189,10 +211,19 @@ $(document).ready(function() {
     window.location = $(this).attr('href');
   });
 
+  $(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+  });
+
   $('#js-accept-cookies').click(function(e){
     e.preventDefault();
     $('#cookies').hide();
-    setCookie('cookies_accepted', true);
+    Cookies.set('cookies_accepted', true);
+  })
+
+  $('#js-open-help').click(function(e) {
+    e.preventDefault;
+    $('#login-help-modal').modal('show');
   })
 
 });
