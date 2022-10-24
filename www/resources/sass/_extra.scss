@@ -585,6 +585,17 @@ input.form-control[type="radio"], input.form-control[type="checkbox"] {
   width: 100%;
 }
 
+#edugain-modal.fade, #favourite-modal.fade {
+  &.show, &.in .modal-dialog, .modal-dialog {
+     transition: none;
+     animation:none;
+    -webkit-animation: none; /* Safari, Chrome and Opera > 12.1 */
+    -moz-animation: none; /* Firefox < 16 */
+    -ms-animation: none; /* Internet Explorer */
+    -o-animation: none; /* Opera < 12.1 */
+  }
+}
+
 /* Firefox < 16 */
 @-moz-keyframes fadein {
   from {
