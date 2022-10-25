@@ -128,9 +128,7 @@ $(document).ready(function() {
   // hide modal smoothly
   $('.js-close-custom').click(function() {
     $modal = $(this).closest('.modal.fade');
-    $modal.slideUp(450, function() {
-      $modal.modal('hide');
-    });
+    $modal.modal('hide');
   });
 
   $(window).resize(function() {
