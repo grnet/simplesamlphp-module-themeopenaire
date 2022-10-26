@@ -45,7 +45,7 @@
       </div>
     </div> <!-- /modal-content -->
   </div> <!-- /modal-dialog -->
-</div> <!-- /modal -->'
+</div> <!-- /modal -->
 <div class="row ssp-content-group">
   <div class="col-sm-12 text-center">
     <h3 class="disco"><?= $this->t('{themeopenaire:discopower:connect_with}') ?></h3>
