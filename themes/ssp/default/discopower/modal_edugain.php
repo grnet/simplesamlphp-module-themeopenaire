@@ -46,7 +46,7 @@
     </div> <!-- /modal-content -->
   </div> <!-- /modal-dialog -->
 </div> <!-- /modal -->
-<div class="row ssp-content-group">
+<div class="row ssp-content-group <?php print !empty($this->data['preferredidp']) ? 'hidden' : ''; ?>">
   <div class="col-sm-12 text-center">
     <h3 class="disco"><?= $this->t('{themeopenaire:discopower:connect_with}') ?></h3>
     <button type="button" class="ssp-btn btn ssp-btn__btn-lg ssp-btn__lg text-uppercase" data-toggle="modal"
