@@ -7,7 +7,7 @@ $basequerystring       = '?' .
 $providersOnlyIcon     = array(
   "google"                 => "svg",
   "linkedin"               => "jpg",
-  "facebook"               => "png",
+  "github"                 => "png",
   "orcid"                  => "jpg",
   "igtf_certificate_proxy" => "jpg",
 );
