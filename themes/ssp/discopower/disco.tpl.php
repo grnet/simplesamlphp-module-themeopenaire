@@ -77,7 +77,7 @@ $this->data['htmlinject']['htmlContentPost'][] = '<script type="text/javascript"
       </div>
       <div class="col-sm-6 col-md-8 col-lg-9 choose-idp">
         <div class="ssp-container-small">
-          <h1 class="text-center disco"><?= $this->t('{themeopenaire:discopower:header}') ?></h1>
+          <h1 class="text-center disco" style="display: <?php print !empty($this->data['preferredidp']) ? 'none' : ''; ?>"><?= $this->t('{themeopenaire:discopower:header}') ?></h1>
           <?php
 
           // FAVOURITE MODAL
@@ -116,7 +116,7 @@ $this->data['htmlinject']['htmlContentPost'][] = '<script type="text/javascript"
           ?>
           <?php
           if (!empty($idp_with_logo_providers)): ?>
-            <div class="row ssp-content-group">
+            <div class="row ssp-content-group <?php print !empty($this->data['preferredidp']) ? 'hidden' : ''; ?>">
               <div class="col-sm-12 text-center">
                 <?php
                 foreach ($idp_with_logo_providers as $idp_entry) {
@@ -130,14 +130,14 @@ $this->data['htmlinject']['htmlContentPost'][] = '<script type="text/javascript"
           endif; ?>
           <?php
           if (!empty($idp_with_logo_providers) && !empty($local_providers)): ?>
-            <div class="row ssp-content-group">
+            <div class="row ssp-content-group <?php print !empty($this->data['preferredidp']) ? 'hidden' : ''; ?>">
               <div class="col-sm-12 text-center ssp-or">or with your OpenAIRE account</div>
             </div>
           <?php
           endif; ?>
           <?php
           if (!empty($local_providers)): ?>
-            <div class="row ssp-content-group">
+            <div class="row ssp-content-group <?php print !empty($this->data['preferredidp']) ? 'hidden' : ''; ?>">
               <div class="col-sm-12 text-center">
                 <?php
                 foreach ($local_providers as $idp_entry) {

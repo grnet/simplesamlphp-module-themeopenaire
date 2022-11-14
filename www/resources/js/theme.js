@@ -92,6 +92,26 @@ function closeNoty(element) {
 }
 
 $(document).ready(function() {
+  // We render the modal in all cases because
+  // if there is no favourite IdP there will be no favourite-modal
+  // element loaded in the DOM
+  $('#favourite-modal').modal({
+    focus: false
+  }).modal('show');
+
+  // resizeAll();
+  // loader for discopower view
+  $('.loader-container').delay(300).fadeOut('slow', function() {
+    $('.loader-container').siblings().not($('#cookies')).show();
+    var setLang = getCookie('setLang');
+    if (setLang) {
+      // $('#edugain-modal').modal({
+      //   focus: false
+      // }).modal('show');
+      deleteCookie('setLang');
+    }
+  });
+
   if (!Cookies.get('cookies_accepted')) {
     $('#cookies').show();
   };
@@ -107,24 +127,6 @@ $(document).ready(function() {
 
   $('[data-toggle="tooltip"]').tooltip();
 
-  // resizeAll();
-  // loader for discopower view
-  $('.loader-container').delay(300).fadeOut('slow', function() {
-    $('.loader-container').siblings().not($('#cookies')).show();
-    var setLang = getCookie('setLang');
-    console.log('setlang:', setLang)
-    if (setLang) {
-      $('#edugain-modal').modal({
-        focus: false
-      }).modal('show');
-      deleteCookie('setLang');
-    } else {
-      $('#favourite-modal').modal({
-        focus: false
-      }).modal('show');
-    }
-  });
-
   // hide modal smoothly
   $('.js-close-custom').click(function() {
     $modal = $(this).closest('.modal.fade');
@@ -135,7 +137,7 @@ $(document).ready(function() {
     resizeAll();
   });
 
-    $('button[name="yes"]').click(function(e){
+  $('button[name="yes"]').click(function(e){
     var inputs = $('input.form-control');
     // Check if mandatory input field is empty
     inputs.each(function(key, input) {
