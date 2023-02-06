@@ -43,12 +43,12 @@ body {
 }
 
 .happy-login {
-  background-image: url("https://openaire-dev.rciam.grnet.gr/proxy/module.php/themeopenaire/resources/images/login_img.png");
+  background-image: url("/proxy/module.php/themeopenaire/resources/images/login_img.png");
   background-color: transparent;
   background-repeat: no-repeat;
   background-size: cover;
 
-  height: 100%;
+  height: 100vh;
   display: flex;
   align-items: end;
   padding-bottom: 2em;
