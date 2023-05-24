@@ -53,6 +53,12 @@
   "user_suspended": {
     "en": "Your identity (%ORGID%) has been suspended. Please contact our <a href=\"mailto:aai@openaire.eu\">support</a> and make sure to include the error message above"
   },
+  "user_error": {
+    "en": "Your identity (%ORGID%) is in error state. Please contact our <a href=\"mailto:aai@openaire.eu\">support</a> and make sure to include the error message above"
+  },
+  "user_error_title": {
+    "en": "Sorry, we were not able to log you in"
+  },
   "user_suspended_title": {
     "en": "Identity suspended"
   },
